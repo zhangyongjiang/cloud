@@ -59,11 +59,11 @@ public class CloneVmXenTask extends XenTask {
         Network network = getNetwork();
         makeVIF(newVm, network, "0");
         
-        SR defaultSR = getDefaultSR();
+        SR sr = SR.getByUuid(connection, cloneRequest.getSrUuid());
         /* Put the SR uuid into the provision XML */
         Map<String, String> otherConfig = newVm.getOtherConfig(connection);
         String disks = otherConfig.get("disks");
-        disks = disks.replace("sr=\"\"", "sr=\"" + defaultSR.getUuid(connection) + "\"");
+        disks = disks.replace("sr=\"\"", "sr=\"" + sr.getUuid(connection) + "\"");
         otherConfig.put("disks", disks);
         newVm.setOtherConfig(connection, otherConfig);
         

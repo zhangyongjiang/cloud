@@ -86,7 +86,8 @@ function createVm() {
 	    hostId: hostId,
 	    templateId: vmId,
 	    vmName: name,
-	    vdiUuid: $('#vdiList').val()
+	    vdiUuid: $('#vdiList').val(),
+	    srUuid: $('#srList').val()
 	}
 	var json = JSON.stringify(req);
     $.ajax({

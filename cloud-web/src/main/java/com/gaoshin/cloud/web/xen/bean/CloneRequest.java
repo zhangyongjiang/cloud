@@ -8,6 +8,7 @@ public class CloneRequest extends Request {
     private String templateId;
     private String vmName;
     private String vdiUuid;
+    private String srUuid;
 
     public String getTemplateId() {
         return templateId;
@@ -39,5 +40,13 @@ public class CloneRequest extends Request {
 
     public void setHostId(Long hostId) {
         this.hostId = hostId;
+    }
+
+    public String getSrUuid() {
+        return srUuid;
+    }
+
+    public void setSrUuid(String srUuid) {
+        this.srUuid = srUuid;
     }
 }
