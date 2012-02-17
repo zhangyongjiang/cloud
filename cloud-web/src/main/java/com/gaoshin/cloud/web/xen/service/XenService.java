@@ -6,6 +6,7 @@ import com.gaoshin.cloud.web.xen.bean.Host;
 import com.gaoshin.cloud.web.xen.bean.HostDetails;
 import com.gaoshin.cloud.web.xen.bean.HostList;
 import com.gaoshin.cloud.web.xen.bean.HostNetworkList;
+import com.gaoshin.cloud.web.xen.bean.MigrationRequest;
 import com.gaoshin.cloud.web.xen.bean.SnapshotRequest;
 import com.gaoshin.cloud.web.xen.bean.StorageRepoDetails;
 import com.gaoshin.cloud.web.xen.bean.StorageRepoList;
@@ -63,4 +64,8 @@ public interface XenService {
     String snapshotVm(SnapshotRequest request);
 
     void changeNetwork(Long hostId, String vmId);
+
+    HostList samePoolHostList(Long hostId);
+
+    void migrateVm(MigrationRequest request);
 }

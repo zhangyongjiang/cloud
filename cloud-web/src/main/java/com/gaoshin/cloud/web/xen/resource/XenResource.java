@@ -21,6 +21,7 @@ import com.gaoshin.cloud.web.xen.bean.Host;
 import com.gaoshin.cloud.web.xen.bean.HostDetails;
 import com.gaoshin.cloud.web.xen.bean.HostList;
 import com.gaoshin.cloud.web.xen.bean.HostNetworkList;
+import com.gaoshin.cloud.web.xen.bean.MigrationRequest;
 import com.gaoshin.cloud.web.xen.bean.SnapshotRequest;
 import com.gaoshin.cloud.web.xen.bean.StorageRepoDetails;
 import com.gaoshin.cloud.web.xen.bean.StorageRepoList;
@@ -134,6 +135,14 @@ public class XenResource extends JerseyBaseResource {
     }
     
     @POST
+    @Path("/host/vm/migrate")
+    public GenericResponse migrateVm(MigrationRequest request) throws Exception {
+        xenService.migrateVm(request);
+        GenericResponse response = new GenericResponse();
+        return response;
+    }
+    
+    @POST
     @Path("/host/vm/snapshot")
     public GenericResponse snapshotVm(SnapshotRequest cloneRequest) throws Exception {
         String uuid = xenService.snapshotVm(cloneRequest);
@@ -186,5 +195,11 @@ public class XenResource extends JerseyBaseResource {
     @Path("/host/network-list")
     public HostNetworkList listNetwork(@QueryParam("hostId") Long hostId) throws Exception {
         return xenService.listNetwork(hostId);
+    }
+    
+    @GET
+    @Path("/same-pool-host-list")
+    public HostList listHost(@QueryParam("hostId") Long hostId) throws Exception {
+        return xenService.samePoolHostList(hostId);
     }
 }

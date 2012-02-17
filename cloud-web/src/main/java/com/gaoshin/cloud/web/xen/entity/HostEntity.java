@@ -28,6 +28,9 @@ public class HostEntity {
     @Column(length=255)
     private String url;
 
+    @Column(length=64)
+    private String uuid;
+
     @Column
     @Enumerated(value=EnumType.STRING)
     private HostStatus status;
@@ -111,6 +114,14 @@ public class HostEntity {
 
     public void setMemoryFree(long memoryFree) {
         this.memoryFree = memoryFree;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
 }

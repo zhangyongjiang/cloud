@@ -21,6 +21,7 @@ import com.gaoshin.cloud.web.xen.bean.Host;
 import com.gaoshin.cloud.web.xen.bean.HostDetails;
 import com.gaoshin.cloud.web.xen.bean.HostList;
 import com.gaoshin.cloud.web.xen.bean.HostNetworkList;
+import com.gaoshin.cloud.web.xen.bean.MigrationRequest;
 import com.gaoshin.cloud.web.xen.bean.SnapshotRequest;
 import com.gaoshin.cloud.web.xen.bean.StorageRepo;
 import com.gaoshin.cloud.web.xen.bean.StorageRepoDetails;
@@ -492,6 +493,37 @@ public class XenServiceImpl implements XenService {
         HostEntity host = xenDao.getEntity(HostEntity.class, hostId);
         try {
             ChangeVmNetworkXenTask task = new ChangeVmNetworkXenTask(host.getUrl(), host.getUser(), host.getPassword(), hostId, vmId);
+            task.exec();
+        }
+        catch (BusinessException e) {
+            throw e;
+        }
+        catch (Exception e) {
+            throw new BusinessException(ServiceError.Unknown, e);
+        }
+    }
+
+    @Override
+    public HostList samePoolHostList(Long hostId) {
+        HostEntity host = xenDao.getEntity(HostEntity.class, hostId);
+        try {
+            HostListXenTask task = new HostListXenTask(host.getUrl(), host.getUser(), host.getPassword(), hostId);
+            task.exec();
+            return task.getHosts();
+        }
+        catch (BusinessException e) {
+            throw e;
+        }
+        catch (Exception e) {
+            throw new BusinessException(ServiceError.Unknown, e);
+        }
+    }
+
+    @Override
+    public void migrateVm(MigrationRequest request) {
+        HostEntity host = xenDao.getEntity(HostEntity.class, request.getHostId());
+        try {
+            VmMigrationXenTask task = new VmMigrationXenTask(host.getUrl(), host.getUser(), host.getPassword(), request);
             task.exec();
         }
         catch (BusinessException e) {

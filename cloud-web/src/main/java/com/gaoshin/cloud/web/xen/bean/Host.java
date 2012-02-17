@@ -15,6 +15,7 @@ public class Host {
     private int cpus;
     private long memoryTotal;
     private long memoryFree;
+    private String uuid;
 
     public long getId() {
         return id;
@@ -86,6 +87,14 @@ public class Host {
 
     public void setMemoryFree(long memoryFree) {
         this.memoryFree = memoryFree;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
 }

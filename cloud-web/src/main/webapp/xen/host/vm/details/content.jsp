@@ -36,6 +36,8 @@
 					<button id="btnSuspend" onClick='suspendVm("${it.hostId}", "${it.uuid}")'>Suspend</button>
 					<button id="btnShutdown" onClick='shutdownVm("${it.hostId}", "${it.uuid}")'>Shutdown</button>
 					<button id="btnSnapshot" onClick='snapshotVm("${it.hostId}", "${it.uuid}")'>Snapshot</button>
+					<button id="btnMigrate" onClick='migrateVm("${it.hostId}", "${it.uuid}")'>Migrate</button>
+					<jsp:include page="host-select.jsp.oo?hostId=${it.hostId}"></jsp:include>
 				</c:if>
 				<c:if test="${it.powerState == 'HALTED'}">
 					<button id="btnStart" onClick='startVm("${it.hostId}", "${it.uuid}")'>Start</button>
@@ -303,6 +305,32 @@ function cloneVm(hostId, vmId) {
             if (transport.status == 200) {
                 var newVm = JSON.parse(transport.responseText);
                 window.location = base + "/xen/host/vm/details/index.jsp.oo?hostId=" + hostId + "&vmId=" + newVm.data;
+            } else {
+                alert('Error: ' + transport.status + ", "
+                                + transport.responseText);
+            }
+        }
+	});
+}
+
+function migrateVm(hostId, vmId) {
+	var hostUuid = $('#hostList').val();
+	var req = {
+	    hostId: hostId,
+	    vmUuid: vmId,
+	    hostUuid: hostUuid
+	}
+	var json = JSON.stringify(req);
+    $.ajax({
+        url : base + "/xen/host/vm/migrate",
+        type : "POST",
+        contentType : "application/json; charset=utf-8",
+        dataType : "json",
+        data: json,
+        complete : function(transport) {
+            if (transport.status == 200) {
+                var newVm = JSON.parse(transport.responseText);
+                window.location.reload();
             } else {
                 alert('Error: ' + transport.status + ", "
                                 + transport.responseText);
