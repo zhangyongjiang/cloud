@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Transient;
 
-import com.gaoshin.cloud.web.job.bean.WorkStatus;
+import com.gaoshin.job.bean.WorkStatus;
+
 import common.util.Misc;
 
 @Entity

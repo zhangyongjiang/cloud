@@ -29,7 +29,7 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-		<property name="packagesToScan" value="com.gaoshin.cloud.web.entity,com.gaoshin.cloud.web.job.entity,com.gaoshin.cloud.web.xen.entity,com.gaoshin.cloud.web.vm.entity,com.gaoshin.cloud.web.user.entity" />
+		<property name="packagesToScan" value="com.gaoshin" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">${hbm2ddl}</prop>

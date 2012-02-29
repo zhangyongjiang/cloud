@@ -2,7 +2,8 @@ package com.gaoshin.cloud.web;
 
 import org.junit.Test;
 
-import com.gaoshin.cloud.web.bean.hadoop.HdfsFile;
+import com.gaoshin.hadoop.hdfs.HdfsFile;
+
 import common.util.JacksonUtil;
 
 public class HdfsResourceTest extends GaoshinResourceTester {

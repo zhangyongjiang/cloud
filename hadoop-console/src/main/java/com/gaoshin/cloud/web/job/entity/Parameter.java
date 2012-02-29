@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import com.gaoshin.cloud.web.job.bean.JobConfKey;
+import com.gaoshin.job.bean.JobConfKey;
 
 public class Parameter  {
     public static Map<String, String> replace(Map<String, String> params) {

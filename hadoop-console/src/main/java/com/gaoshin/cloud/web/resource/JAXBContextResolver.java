@@ -6,15 +6,15 @@ import javax.xml.bind.JAXBContext;
 
 import com.gaoshin.cloud.web.bean.GenericResponse;
 import com.gaoshin.cloud.web.bean.StringList;
-import com.gaoshin.cloud.web.bean.hadoop.HdfsFile;
-import com.gaoshin.cloud.web.job.bean.JobConfList;
-import com.gaoshin.cloud.web.job.bean.JobDependencyList;
-import com.gaoshin.cloud.web.job.bean.JobDetails;
-import com.gaoshin.cloud.web.job.bean.JobExecutionDetails;
-import com.gaoshin.cloud.web.job.bean.JobExecutionDetailsList;
-import com.gaoshin.cloud.web.job.bean.JobExecutionList;
-import com.gaoshin.cloud.web.job.bean.JobList;
-import com.gaoshin.cloud.web.job.bean.TaskList;
+import com.gaoshin.hadoop.hdfs.HdfsFile;
+import com.gaoshin.job.bean.JobConfList;
+import com.gaoshin.job.bean.JobDependencyList;
+import com.gaoshin.job.bean.JobDetails;
+import com.gaoshin.job.bean.JobExecutionDetails;
+import com.gaoshin.job.bean.JobExecutionDetailsList;
+import com.gaoshin.job.bean.JobExecutionList;
+import com.gaoshin.job.bean.JobList;
+import com.gaoshin.job.bean.TaskList;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 

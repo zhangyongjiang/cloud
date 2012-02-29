@@ -49,8 +49,7 @@ public class JsonMessageBodyWriter implements MessageBodyWriter<Object> {
             throws IOException, WebApplicationException {
         StringWriter sw = new StringWriter();
         ObjectMapper jsonProcessor = new ObjectMapper();
-        String indent = requestInvoker.get().getParameter("indent");
-        if(indent == null || indent.length() == 0 || "1".equals(indent))
+        if("1".equals(requestInvoker.get().getParameter("indent")))
             jsonProcessor.configure(Feature.INDENT_OUTPUT, true); 
 		jsonProcessor.configure(Feature.WRITE_NULL_PROPERTIES, false);
 		jsonProcessor.configure(
