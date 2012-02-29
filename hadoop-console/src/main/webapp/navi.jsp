@@ -17,7 +17,7 @@
 	<h3 style="margin-top: 16px">Admin</h3>
 	<ul class="submenu">
 		<li><a href='<c:url value=""/>'>Account</a></li>
-		<li><a href='<c:url value=""/>'>Settings</a></li>
+		<li><a href='<c:url value="/conf/list/index.jsp.oo"/>'>Settings</a></li>
 		<li><a href='<c:url value=""/>'>Support</a></li>
 	</ul>
 

@@ -19,7 +19,7 @@ public class ConfResource extends JerseyBaseResource {
     @Autowired private ConfService confService;
 
     @POST
-    @Path("/set")
+    @Path("/create")
     public Configuration set(Configuration conf) {
         return confService.set(conf.getName(), conf.getValue());
     }

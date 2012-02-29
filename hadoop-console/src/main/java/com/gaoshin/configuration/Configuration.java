@@ -1,6 +1,8 @@
 package com.gaoshin.configuration;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Configuration {
 	private Long id;
 	private String name;

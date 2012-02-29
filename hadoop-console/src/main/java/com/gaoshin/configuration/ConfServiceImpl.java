@@ -17,7 +17,7 @@ public class ConfServiceImpl implements ConfService {
 
     @Override
     public Configuration set(String key, String value) {
-        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "key", key);
+        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "name", key);
         if(entity == null) {
             entity = new ConfigurationEntity();
             entity.setName(key);
@@ -34,7 +34,7 @@ public class ConfServiceImpl implements ConfService {
 
     @Override
     public Configuration get(String key) {
-        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "key", key);
+        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "name", key);
         if(entity == null) {
             return null;
         }
