@@ -15,9 +15,6 @@ import com.gaoshin.cloud.web.job.bean.JobExecutionDetailsList;
 import com.gaoshin.cloud.web.job.bean.JobExecutionList;
 import com.gaoshin.cloud.web.job.bean.JobList;
 import com.gaoshin.cloud.web.job.bean.TaskList;
-import com.gaoshin.cloud.web.xen.bean.VirtualBlockDeviceList;
-import com.gaoshin.cloud.web.xen.bean.VirtualDiskImageList;
-import com.gaoshin.cloud.web.xen.bean.VmDetails;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
 
@@ -36,9 +33,6 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
             TaskList.class,
             JobDependencyList.class,
             JobDetails.class,
-            VmDetails.class,
-            VirtualDiskImageList.class,
-            VirtualBlockDeviceList.class
             };
 
     public JAXBContextResolver() throws Exception {

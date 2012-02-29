@@ -10,5 +10,5 @@
 </div>
 
 <div style="margin-left:20px;margin-top:-100px;">
-<h2>Gaoshin Cloud Platform</h2>
+<h2>Hadoop Console</h2>
 </div>
