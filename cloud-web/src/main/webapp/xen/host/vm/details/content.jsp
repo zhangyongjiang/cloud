@@ -58,6 +58,10 @@
 		<table style="clear:both;border: solid 0px;">
 		<tr><td>Host</td>
 		<td><a href='<c:url value="/xen/host/details/index.jsp.oo?hostId="/>${it.hostId}'>${it.host.name}</a></td></tr>
+	
+		<tr><td>Resident On</td>
+		<td>${it.residentOn}</td></tr>
+
 		<tr><td>VM Name Label</td>
 		<td>${it.nameLabel}</td></tr>
 	

@@ -248,9 +248,11 @@ public class XenServiceImpl implements XenService {
             }.exec();
         }
         catch (BusinessException e) {
+            e.printStackTrace();
             throw e;
         }
         catch (Exception e) {
+            e.printStackTrace();
             throw new BusinessException(ServiceError.Unknown, e);
         }
     }

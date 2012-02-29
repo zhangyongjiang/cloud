@@ -12,6 +12,7 @@ public class VmDetails extends Vm {
     private List<XenConsole> consoleList = new ArrayList<XenConsole>();
     private List<VirtualBlockDevice> vbdList;
     private List<VirtualNetworkInterface> vifList;
+    private String residentOn;
 
     public Host getHost() {
         return host;
@@ -57,4 +58,11 @@ public class VmDetails extends Vm {
         this.vifList = vifList;
     }
 
+    public void setResidentOn(String hostname) {
+        this.residentOn = hostname;
+    }
+
+    public String getResidentOn() {
+        return residentOn;
+    }
 }

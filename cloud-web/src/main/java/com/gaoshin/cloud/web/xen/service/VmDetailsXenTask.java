@@ -11,6 +11,7 @@ import com.gaoshin.cloud.web.xen.bean.VmDetails;
 import com.gaoshin.cloud.web.xen.bean.XenConsole;
 import com.xensource.xenapi.Connection;
 import com.xensource.xenapi.Console;
+import com.xensource.xenapi.Types;
 import com.xensource.xenapi.VBD;
 import com.xensource.xenapi.VIF;
 import com.xensource.xenapi.VM;
@@ -55,6 +56,14 @@ public class VmDetailsXenTask extends XenTask {
         vmDetails.setUuid(record.uuid);
         vmDetails.setVCPUsAtStartup(record.VCPUsAtStartup);
         vmDetails.setVCPUsMax(record.VCPUsMax);
+        try {
+            if(Types.VmPowerState.RUNNING.equals(record.powerState)) {
+                vmDetails.setResidentOn(record.residentOn.getHostname(connection));
+            }
+        }
+        catch (Exception e1) {
+            e1.printStackTrace();
+        }
         
         VirtualBlockDeviceList vbdList = new VirtualBlockDeviceList();
         for(VBD vbd : record.VBDs) {
