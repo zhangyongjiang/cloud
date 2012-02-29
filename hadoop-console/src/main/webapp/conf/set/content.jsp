@@ -1,27 +1,48 @@
+<%@page import="com.gaoshin.configuration.Configuration"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 <%@ taglib tagdir="/WEB-INF/tags/gaoshin" prefix="g" %>
+
+<%
+	String id = request.getParameter("confId");
+	if(id != null) {
+	    String url = "/conf/get/" + id + "?format=object";
+	    request.getRequestDispatcher(url).include(request, response);
+	}
+	else {
+	    request.setAttribute("it", new Configuration());
+	}
+%>
 
 <div class="page-header">Create New Configuration</div>
 
 <form method="post" onSubmit="return createConf();">
 	<table>
-		<o:text-input-tr label="Name" id="name"></o:text-input-tr>
-		<o:text-input-tr label="Value" id="value"></o:text-input-tr>
+		<o:text-input-tr label="Name" id="name" value="${it.name }"></o:text-input-tr>
+		<o:text-input-tr label="Value" id="value" value="${it.value }"></o:text-input-tr>
 		<o:submit-tr value="Create" cancel="window.history.back()"></o:submit-tr>
 	</table>
 </form>
 
 <script type="text/javascript">
 function createConf() {
+	<c:if test="${not empty it.id}">
+		var req = {
+				id: ${it.id},
+				name: $("#name").val(),
+				value: $("#value").val()
+			};
+	</c:if>
+	<c:if test="${empty it.id}">
 	var req = {
-		name: $("#name").val(),
-		value: $("#value").val()
-	};
+			name: $("#name").val(),
+			value: $("#value").val()
+		};
+	</c:if>
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/conf/create",
+            url : base + "/conf/set",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

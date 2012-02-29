@@ -12,15 +12,34 @@
 
 <button onclick="createConf()">Create</button>
 
-<table>
-<tr><th>Name</th><th>Value</th></tr>
+<table style="border:solid 1px;">
+<tr><th>Name</th><th>Value</th><th>&nbsp;</th></tr>
 <c:forEach var="conf" items="${it }">
-	<tr><td>${conf.name}</td><td>${conf.value }</td></tr>
+	<tr><td><a href='<c:url value="/conf/set/index.jsp.oo?confId="/>${conf.id}'>${conf.name}</a></td><td>${conf.value }</td><td><button onclick='remove(${conf.id})'>Remove</button></td></tr>
 </c:forEach>
 </table>
 
 <script type="text/javascript">
 	function createConf() {
-		window.location = base + "/conf/create/index.jsp.oo";
+		window.location = base + "/conf/set/index.jsp.oo";
+	}
+
+	function remove(id) {
+		if(!confirm("are you sure?"))
+			return;
+	    $.ajax({
+            url : base + "/conf/remove/" + id,
+            type : "POST",
+            contentType : "application/json; charset=utf-8",
+            dataType : "json",
+            complete : function(transport) {
+                    if (transport.status == 200) {
+                            window.location.reload();
+                    } else {
+                            alert('Error: ' + transport.status + ", "
+                                            + transport.responseText);
+                    }
+            }
+    });
 	}
 </script>

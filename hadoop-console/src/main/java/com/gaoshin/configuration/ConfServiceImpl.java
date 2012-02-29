@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gaoshin.cloud.web.bean.BusinessException;
+import com.gaoshin.cloud.web.bean.ServiceError;
 import common.util.reflection.ReflectionUtil;
 
 @Service("confService")
@@ -50,6 +52,27 @@ public class ConfServiceImpl implements ConfService {
             beans.add(ReflectionUtil.copy(Configuration.class, entity));
         }
         return beans;
+    }
+
+    @Override
+    public void remove(Long confid) {
+        ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
+        if(entity == null) 
+            throw new BusinessException(ServiceError.NotFound);
+        confDao.deleteEntity(entity);
+    }
+
+    @Override
+    public Configuration get(Long confid) {
+        ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
+        if(entity == null) 
+            throw new BusinessException(ServiceError.NotFound);
+        return ReflectionUtil.copy(Configuration.class, entity);
+    }
+
+    @Override
+    public Configuration set(Configuration conf) {
+        return set(conf.getName(), conf.getValue());
     }
 
 }

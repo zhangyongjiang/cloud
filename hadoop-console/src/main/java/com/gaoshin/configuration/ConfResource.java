@@ -5,11 +5,13 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.gaoshin.cloud.web.bean.GenericResponse;
 import common.util.web.JerseyBaseResource;
 
 @Path("/conf")
@@ -19,9 +21,22 @@ public class ConfResource extends JerseyBaseResource {
     @Autowired private ConfService confService;
 
     @POST
-    @Path("/create")
+    @Path("/set")
     public Configuration set(Configuration conf) {
-        return confService.set(conf.getName(), conf.getValue());
+        return confService.set(conf);
+    }
+    
+    @POST
+    @Path("/remove/{id}")
+    public GenericResponse remove(@PathParam("id") Long confid) {
+        confService.remove(confid);
+        return new GenericResponse();
+    }
+    
+    @GET
+    @Path("/get/{id}")
+    public Configuration get(@PathParam("id") Long confid) {
+        return confService.get(confid);
     }
     
     @GET
