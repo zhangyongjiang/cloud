@@ -15,6 +15,57 @@
 		<tests.report.name>${project.artifactId}-tests-report</tests.report.name>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/common</directory>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>src/main/resources/dev</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>stage</id>
+			<activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/common</directory>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>src/main/resources/stage</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources/common</directory>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>src/main/resources/prod</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -631,24 +682,8 @@
 
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>jdk-1.5</id>
-			<activation>
-				<jdk>1.5</jdk>
-			</activation>
-			<dependencies>
-				<dependency> <!-- depend on JAXB to enable WADL support -->
-					<groupId>com.sun.xml.bind</groupId>
-					<artifactId>jaxb-impl</artifactId>
-					<version>2.1.12</version>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
-
 	<build>
-		<finalName>gao</finalName>
+		<finalName>hadoop-console</finalName>
 		<plugins>
 			<!--plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>hibernate3-maven-plugin</artifactId> 
 				<version>2.2</version> <configuration> <componentProperties> <outputfilename>schema.sql</outputfilename> 
