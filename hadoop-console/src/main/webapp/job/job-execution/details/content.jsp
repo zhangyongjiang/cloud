@@ -6,7 +6,7 @@
 
 <%
 	String jobExecutionId = request.getParameter("jobExecutionId");
-	String url = "/job/job-execution/details?format=object&var=it&jobExecutionId=" + jobExecutionId;
+	String url = "/ws/v1/job/job-execution/details?format=object&var=it&jobExecutionId=" + jobExecutionId;
 	request.getRequestDispatcher(url).include(request, response);
 %>
 

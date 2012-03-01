@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import common.util.web.JerseyBaseResource;
 
-@Path("/misc")
+@Path("/ws/v1/misc")
 @Component
 @Produces({
         "text/html;charset=utf-8",

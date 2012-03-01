@@ -4,7 +4,7 @@
 
 <%
 	String jobId = request.getParameter("jobId");
-	String url = "/job/details?format=object&var=job&id=" + jobId;
+	String url = "/ws/v1/job/details?format=object&var=job&id=" + jobId;
 %>
 <jsp:include page="<%=url %>"></jsp:include>
 
@@ -30,7 +30,7 @@ function createJobConf() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/job/job-conf/create",
+            url : base + "/ws/v1/job/job-conf/create",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

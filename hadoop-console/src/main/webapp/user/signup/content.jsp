@@ -49,7 +49,7 @@ function signup() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/user/signup",
+            url : base + "/ws/v1/user/signup",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

@@ -10,10 +10,9 @@ import javax.ws.rs.QueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import common.util.web.JerseyBaseResource;
 
-@Path("/hadoop/job")
+@Path("/ws/v1/hadoop/job")
 @Component
 @Produces({ "text/html;charset=utf-8", "text/xml;charset=utf-8", "application/json" })
 public class HadoopApplicationResource extends JerseyBaseResource {

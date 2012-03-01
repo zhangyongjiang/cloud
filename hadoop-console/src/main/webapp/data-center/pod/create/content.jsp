@@ -3,7 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 <%
 	String dataCenterId = request.getParameter("dataCenterId");
-	String url = "/data-center/details?format=object&var=dataCenter&dataCenterId=" + dataCenterId;
+	String url = "/ws/v1/data-center/details?format=object&var=dataCenter&dataCenterId=" + dataCenterId;
 	request.getRequestDispatcher(url).include(request, response);
 %>
 
@@ -29,7 +29,7 @@ function createPod() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/data-center/pod/create",
+            url : base + "/ws/v1/data-center/pod/create",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

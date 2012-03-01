@@ -6,7 +6,7 @@
 
 <%
 	String jobId = request.getParameter("id");
-	String url = "/job/details?format=object&var=it&id=" + jobId;
+	String url = "/ws/v1/job/details?format=object&var=it&id=" + jobId;
 %>
 <jsp:include page="<%=url %>"></jsp:include>
 
@@ -113,7 +113,7 @@ function deleteJob(jobId) {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/job/delete/" + jobId,
+        url : base + "/ws/v1/job/delete/" + jobId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         headers: {Accept : "application/json; charset=utf-8"},
@@ -134,7 +134,7 @@ function enableJob(jobId, enable) {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/job/enable/" + jobId + "/" + enable,
+        url : base + "/ws/v1/job/enable/" + jobId + "/" + enable,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         dataType : "json",
@@ -154,7 +154,7 @@ function deleteJobConf(jobConfId) {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/job/job-conf/delete/" + jobConfId,
+        url : base + "/ws/v1/job/job-conf/delete/" + jobConfId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         dataType : "json",
@@ -174,7 +174,7 @@ function deleteTask(taskId) {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/job/task/delete/" + taskId,
+        url : base + "/ws/v1/job/task/delete/" + taskId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         dataType : "json",
@@ -194,7 +194,7 @@ function deleteJobDependency(jobDependencyId) {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/job/job-dependency/delete/" + jobDependencyId,
+        url : base + "/ws/v1/job/job-dependency/delete/" + jobDependencyId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         dataType : "json",
@@ -218,7 +218,7 @@ function runNow(jobId) {
     var json = JSON.stringify(req);
     
     $.ajax({
-        url : base + "/job/run/" + jobId,
+        url : base + "/ws/v1/job/run/" + jobId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         data: json,

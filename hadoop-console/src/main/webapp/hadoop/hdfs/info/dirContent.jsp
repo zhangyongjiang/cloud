@@ -60,7 +60,7 @@ function mkdir() {
 	}
 
 	var path = '${it.path}/' + name;
-	var url = base + '/hadoop/hdfs/mkdir' + path;
+	var url = base + '/ws/v1/hadoop/hdfs/mkdir' + path;
     $.ajax({
         url : url,
         type : "POST",
@@ -80,7 +80,7 @@ function mkdir() {
 
 function rm(name) {
 	var path = '${it.path}/' + name;
-	var url = base + '/hadoop/hdfs/rm?path=' + path;
+	var url = base + '/ws/v1/hadoop/hdfs/rm?path=' + path;
     $.ajax({
         url : url,
         type : "GET",

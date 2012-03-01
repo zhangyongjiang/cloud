@@ -6,7 +6,7 @@
 %><%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" 
 %><%
 	String dataCenterId = request.getParameter("dataCenterId");
-	String url = "/data-center/details?format=object&var=it&dataCenterId=" + dataCenterId;
+	String url = "/ws/v1/data-center/details?format=object&var=it&dataCenterId=" + dataCenterId;
 	request.getRequestDispatcher(url).include(request, response);
 %>
 
@@ -47,7 +47,7 @@ function removeDataCenter() {
 	if (!agree)
 		return;
     $.ajax({
-        url : base + "/data-center/delete/${it.id}",
+        url : base + "/ws/v1/data-center/delete/${it.id}",
         type : "POST",
         contentType : "application/json; charset=utf-8",
         headers: {Accept : "application/json; charset=utf-8"},

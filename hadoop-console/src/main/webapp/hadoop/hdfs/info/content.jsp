@@ -5,7 +5,7 @@
 
 <%
         String path = request.getParameter("path");
-        String pageUrl = "/hadoop/hdfs/info?path=" + path + "&format=object&var=it";
+        String pageUrl = "/ws/v1/hadoop/hdfs/info?path=" + path + "&format=object&var=it";
 %>
 <jsp:include page="<%= pageUrl %>"></jsp:include>
 

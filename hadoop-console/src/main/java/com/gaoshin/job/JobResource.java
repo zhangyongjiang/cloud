@@ -27,7 +27,7 @@ import com.gaoshin.job.bean.Task;
 import com.gaoshin.job.bean.TaskDetails;
 import common.util.web.JerseyBaseResource;
 
-@Path("/job")
+@Path("/ws/v1/job")
 @Component
 @Produces({ "text/html;charset=utf-8", "text/xml;charset=utf-8", "application/json" })
 public class JobResource extends JerseyBaseResource {

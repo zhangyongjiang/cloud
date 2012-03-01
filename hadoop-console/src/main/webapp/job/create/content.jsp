@@ -32,7 +32,7 @@ function createJob() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/job/create",
+            url : base + "/ws/v1/job/create",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

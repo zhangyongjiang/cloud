@@ -2,7 +2,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 <%@ taglib tagdir="/WEB-INF/tags/gaoshin" prefix="g" %>
 
-<jsp:include page="/job/list?format=object&var=jobs"></jsp:include>
+<jsp:include page="/ws/v1/job/list?format=object&var=jobs"></jsp:include>
 
 <div class="page-header">Work Flow List</div>
 

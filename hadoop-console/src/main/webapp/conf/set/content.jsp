@@ -6,7 +6,7 @@
 <%
 	String id = request.getParameter("confId");
 	if(id != null) {
-	    String url = "/conf/get/" + id + "?format=object";
+	    String url = "/ws/v1/conf/get/" + id + "?format=object";
 	    request.getRequestDispatcher(url).include(request, response);
 	}
 	else {
@@ -42,7 +42,7 @@ function createConf() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/conf/set",
+            url : base + "/ws/v1/conf/set",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

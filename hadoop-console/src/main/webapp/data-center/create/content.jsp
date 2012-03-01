@@ -21,7 +21,7 @@ function createDataCenter() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/data-center/create",
+            url : base + "/ws/v1/data-center/create",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

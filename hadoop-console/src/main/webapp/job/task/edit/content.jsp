@@ -4,7 +4,7 @@
 
 <%
 	String id = request.getParameter("id");
-	String url = "/job/task/details?format=object&var=it&id=" + id;
+	String url = "/ws/v1/job/task/details?format=object&var=it&id=" + id;
 %>
 <jsp:include page="<%=url %>"></jsp:include>
 
@@ -45,7 +45,7 @@ function updateTask() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/job/task/update",
+            url : base + "/ws/v1/job/task/update",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

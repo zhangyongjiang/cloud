@@ -4,7 +4,7 @@
 
 <%
 	String id = request.getParameter("id");
-	String url = "/job/job-dependency/details?format=object&var=it&id=" + id;
+	String url = "/ws/v1/job/job-dependency/details?format=object&var=it&id=" + id;
 %>
 <jsp:include page="<%=url %>"></jsp:include>
 
@@ -29,7 +29,7 @@ function updateJobDependency() {
 	
     var json = JSON.stringify(req);
     $.ajax({
-            url : base + "/job/job-dependency/update",
+            url : base + "/ws/v1/job/job-dependency/update",
             type : "POST",
             data : json,
             contentType : "application/json; charset=utf-8",

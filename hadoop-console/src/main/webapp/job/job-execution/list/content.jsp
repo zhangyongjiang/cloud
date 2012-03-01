@@ -5,7 +5,7 @@
 
 <%
 	String jobId = request.getParameter("jobId");
-	String url = "/job/job-execution/list?format=object&var=it&jobId=" + jobId;
+	String url = "/ws/v1/job/job-execution/list?format=object&var=it&jobId=" + jobId;
 %>
 <jsp:include page="<%=url %>"></jsp:include>
 

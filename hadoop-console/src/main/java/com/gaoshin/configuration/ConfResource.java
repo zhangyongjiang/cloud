@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.gaoshin.cloud.web.bean.GenericResponse;
 import common.util.web.JerseyBaseResource;
 
-@Path("/conf")
+@Path("/ws/v1/conf")
 @Component
 @Produces({ "text/html;charset=utf-8", "text/xml;charset=utf-8", "application/json" })
 public class ConfResource extends JerseyBaseResource {

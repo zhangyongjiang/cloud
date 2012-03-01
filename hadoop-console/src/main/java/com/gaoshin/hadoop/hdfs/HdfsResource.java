@@ -21,7 +21,7 @@ import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import common.util.web.JerseyBaseResource;
 
-@Path("/hadoop/hdfs")
+@Path("/ws/v1/hadoop/hdfs")
 @Component
 @Produces({ "text/html;charset=utf-8", "text/xml;charset=utf-8", "application/json;charset=utf-8" })
 public class HdfsResource extends JerseyBaseResource {

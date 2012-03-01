@@ -4,7 +4,7 @@
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 
 <%
-	String url = "/conf/list?format=object";
+	String url = "/ws/v1/conf/list?format=object";
 	request.getRequestDispatcher(url).include(request, response);
 %>
 
@@ -28,7 +28,7 @@
 		if(!confirm("are you sure?"))
 			return;
 	    $.ajax({
-            url : base + "/conf/remove/" + id,
+            url : base + "/ws/v1/conf/remove/" + id,
             type : "POST",
             contentType : "application/json; charset=utf-8",
             dataType : "json",

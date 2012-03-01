@@ -40,7 +40,7 @@
 		$("#uploading").show();
 
 		$.ajaxFileUpload({
-			url : base + '/hadoop/hdfs/upload<%=path%>',
+			url : base + '/ws/v1/hadoop/hdfs/upload<%=path%>',
 			secureuri : false,
 			fileElementId : 'file',
 //			dataType : 'json',
