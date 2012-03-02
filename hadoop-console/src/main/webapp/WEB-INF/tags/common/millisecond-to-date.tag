@@ -1,3 +1,4 @@
+<%@tag import="java.util.TimeZone"%>
 <%@tag import="java.text.SimpleDateFormat"%>
 <%@tag import="java.util.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
@@ -10,6 +11,7 @@
 		    format = "yyyy/MM/dd HH:mm:ss";
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String str = sdf.format(date);
 		out.write(str);
 	}
