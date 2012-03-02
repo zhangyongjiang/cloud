@@ -32,7 +32,7 @@
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><img border="0" src="<c:url value="/images/status-${jobexec.status}.gif"/>"/> ${jobexec.status}</td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${jobexec.scheduledStartTime}"/>&nbsp;</td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${jobexec.startTime}"/>&nbsp;</td>
-				<td style="text-align:left;border:solid 1px #ddd;padding:6px;">${jobexec.expectedDuration}</td>
+				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-time-len time="${jobexec.expectedDuration}"/></td>
 				<td style="text-align:left;border:solid 1px ${slaColor};padding:6px;"><o:millisecond-to-time-len time="${jobexec.duration}"/>&nbsp;</td>
 			</tr>
 		</c:forEach>
