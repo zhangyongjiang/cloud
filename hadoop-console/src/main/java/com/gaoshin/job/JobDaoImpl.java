@@ -56,10 +56,10 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     @Override
     public List<JobExecutionEntity> getJobExecution(Long upstreamJobId, long upstreamStartTime, WorkStatus status) {
         if(status == null) {
-            return find("from JobExecution je where je.jobId=? and je.scheduledStartTime=?", upstreamJobId, upstreamStartTime);
+            return find("from JobExecutionEntity je where je.jobId=? and je.scheduledStartTime=?", upstreamJobId, upstreamStartTime);
         }
         else {
-            return find("from JobExecution je where je.jobId=? and je.scheduledStartTime=? and je.status=?", upstreamJobId, upstreamStartTime, status);
+            return find("from JobExecutionEntity je where je.jobId=? and je.scheduledStartTime=? and je.status=?", upstreamJobId, upstreamStartTime, status);
         }
     }
 
