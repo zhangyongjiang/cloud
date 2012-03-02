@@ -21,7 +21,6 @@ import com.gaoshin.job.bean.JobConfKey;
 import com.gaoshin.job.bean.JobConfList;
 import com.gaoshin.job.bean.JobExecution;
 import com.gaoshin.job.bean.WorkStatus;
-
 import common.util.reflection.ReflectionUtil;
 
 @Service("jobScheduler")
@@ -31,6 +30,7 @@ public class JobSchedulerImpl implements JobScheduler {
     @Autowired private JobExecutionManager jobExecutionManager;
 
     public JobSchedulerImpl() {
+        System.out.println("starting JobSchedulerImpl");
         startCronSchedulerThread();
     }
     
@@ -46,7 +46,12 @@ public class JobSchedulerImpl implements JobScheduler {
                     }
                 }
                 while(true) {
-                    schedule();
+                    try {
+                        schedule();
+                    }
+                    catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
                     try {
                         Thread.sleep(10000);
                     }
