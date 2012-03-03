@@ -1,9 +1,7 @@
 package com.gaoshin.job;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import com.gaoshin.cloud.web.bean.StringList;
 import com.gaoshin.cloud.web.job.entity.JobDependencyEntity;
 import com.gaoshin.cloud.web.job.entity.JobEntity;
 import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
-import com.gaoshin.cloud.web.job.entity.Parameter;
 import com.gaoshin.cloud.web.job.entity.RuntimeJobConfEntity;
 import com.gaoshin.cloud.web.job.entity.TaskEntity;
 import com.gaoshin.cloud.web.job.entity.TaskExecutionEntity;
@@ -27,7 +24,6 @@ import com.gaoshin.job.bean.RuntimeJobConf;
 import com.gaoshin.job.bean.TaskExecution;
 import com.gaoshin.job.bean.TaskProcessor;
 import com.gaoshin.job.bean.WorkStatus;
-
 import common.util.reflection.ReflectionUtil;
 
 @Service("jobExecutionManager")
@@ -207,11 +203,11 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public JobExecutionDetailsList getJobExecutionList(Long jobId) {
+    public JobExecutionDetailsList getJobExecutionList(Long jobId, int offset, int size) {
         JobEntity je = jobDao.getEntity(JobEntity.class, jobId);
         Job job = ReflectionUtil.copy(Job.class, je);
         
-        List<JobExecutionEntity> entities = jobDao.getJobExecutionList(jobId);
+        List<JobExecutionEntity> entities = jobDao.getJobExecutionList(jobId, offset, size);
         JobExecutionDetailsList list = new JobExecutionDetailsList();
         list.setJob(job);
         for(JobExecutionEntity jee : entities) {

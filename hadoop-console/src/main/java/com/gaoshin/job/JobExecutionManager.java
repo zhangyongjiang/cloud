@@ -18,7 +18,7 @@ public interface JobExecutionManager {
 
     void checkDueJob();
 
-    JobExecutionDetailsList getJobExecutionList(Long jobId);
+    JobExecutionDetailsList getJobExecutionList(Long jobId, int offset, int size);
 
     JobExecutionDetails getJobExecutionDetails(Long jobExecutionId);
 }
