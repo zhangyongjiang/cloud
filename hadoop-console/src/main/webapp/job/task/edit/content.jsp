@@ -13,7 +13,7 @@
 <form method="post" onSubmit="return updateTask();">
 	<table>
 		<o:text-input-tr label="Name" id="name" value="${it.name}"></o:text-input-tr>
-		<o:text-input-tr label="Arguments" id="args" size="80" value="${it.args}"></o:text-input-tr>
+		<o:textarea-tr label="Arguments" id="args" value="${it.args}"></o:textarea-tr>
 		<o:text-input-tr label="Is Error Handling Task?" id="errorHandlingTask" value="${it.errorHandlingTask}"></o:text-input-tr>
 		<o:text-input-tr label="Exec Order" id="execOrder"  value="${it.execOrder}"></o:text-input-tr>
 		<o:text-input-tr label="Disabled?" id="disabled"  value="${it.disabled}"></o:text-input-tr>
