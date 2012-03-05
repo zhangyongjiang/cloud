@@ -164,9 +164,16 @@ public abstract class BaseProcess implements GaoshinProcess{
         doJob(params);
         
         if(output != null) {
-            OutputStream os = getOutputStream();
-            os.write(output.getBytes());
-            os.close();
+            OutputStream os = null;
+            try {
+                os = getOutputStream();
+                os.write(output.getBytes());
+                os.close();
+            }
+            finally {
+                if(os != null)
+                    os.close();
+            }
         }
         
         catchStdout();
@@ -200,36 +207,51 @@ public abstract class BaseProcess implements GaoshinProcess{
     }
     
     protected void catchStderr() throws IOException {
-        InputStream errStream = getErrorStream();
-        StringBuilder sb = new StringBuilder();
-        byte[] buff = new byte[8192];
-        while(true) {
-            int len = errStream.read(buff);
-            if(len < 0) {
-                break;
+        InputStream errStream = null;
+        try {
+            errStream = getErrorStream();
+            StringBuilder sb = new StringBuilder();
+            byte[] buff = new byte[8192];
+            while(true) {
+                int len = errStream.read(buff);
+                if(len < 0) {
+                    break;
+                }
+                String stderr = new String(buff, 0, len);
+                sb.append(stderr);
             }
-            String stderr = new String(buff, 0, len);
-            sb.append(stderr);
+            currentTry.appendNote(sb.toString());
         }
-        currentTry.appendNote(sb.toString());
+        finally {
+            if(errStream != null)
+                errStream.close();
+        }
     }
 
     protected void catchStdout() throws IOException {
-        InputStream inputStream = getInputStream();
-        byte[] buff = new byte[8192];
-        StringBuilder sb = new StringBuilder();
-        while(true) {
-            int len = inputStream.read(buff);
-            if(len < 0) {
-                break;
+        InputStream inputStream = null;
+        try {
+            inputStream = getInputStream();
+            byte[] buff = new byte[8192];
+            StringBuilder sb = new StringBuilder();
+            while(true) {
+                int len = inputStream.read(buff);
+                if(len < 0) {
+                    break;
+                }
+                String stdout = new String(buff, 0, len);
+                sb.append(stdout);
             }
-            String stdout = new String(buff, 0, len);
-            sb.append(stdout);
+            if(sb.length() > 0) {
+                String stdout = sb.toString();
+                currentTry.appendStdout(stdout);
+                parseOutput(stdout);
+            }
         }
-        if(sb.length() > 0) {
-            String stdout = sb.toString();
-            currentTry.appendStdout(stdout);
-            parseOutput(stdout);
+        finally {
+            if(inputStream != null) {
+                inputStream.close();
+            }
         }
     }
 
