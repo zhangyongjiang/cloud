@@ -113,7 +113,7 @@ public abstract class BaseProcess implements GaoshinProcess{
     }
     
     public void start() {
-        new Thread(new Runnable() {
+        final Thread main = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -123,7 +123,30 @@ public abstract class BaseProcess implements GaoshinProcess{
                     error(e);
                 }
             }
-        }).start();
+        });
+        
+        final Thread monitor = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long startTime = System.currentTimeMillis();
+                while(true) {
+                    try {
+                        Thread.sleep(1000);
+                        long now = System.currentTimeMillis();
+                        long diff = now - startTime;
+                        if(diff > 3600000) {
+                            System.out.println("main thread exceeds 1 hours limit");
+                            main.interrupt();
+                        }
+                    }
+                    catch (Exception e) {
+                    }
+                }
+            }
+        });
+        
+        main.start();
+        monitor.start();
     }
     
     protected void exec() throws Exception {
