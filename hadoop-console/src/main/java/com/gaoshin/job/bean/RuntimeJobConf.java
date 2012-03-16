@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class RuntimeJobConf {
     private String id;
-	private String ckey;
-	private String cvalue;
+	private String name;
+	private String value;
 	private boolean password = false;
 	private String jobExecutionId;
 
@@ -14,8 +14,8 @@ public class RuntimeJobConf {
 	}
 	
 	public RuntimeJobConf(String key, String value) {
-		this.ckey = key;
-		this.cvalue = value;
+		this.name = key;
+		this.value = value;
 	}
 	
 	public void setPassword(boolean isPassword) {
@@ -26,20 +26,20 @@ public class RuntimeJobConf {
 		return password;
 	}
 
-    public String getCkey() {
-        return ckey;
+    public String getName() {
+        return name;
     }
 
-    public void setCkey(String ckey) {
-        this.ckey = ckey;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCvalue() {
-        return cvalue;
+    public String getValue() {
+        return value;
     }
 
-    public void setCvalue(String cvalue) {
-        this.cvalue = cvalue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getId() {

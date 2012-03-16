@@ -22,11 +22,13 @@ import com.gaoshin.cloud.web.job.entity.TaskEntity;
 import com.gaoshin.job.bean.Job;
 import com.gaoshin.job.bean.JobConf;
 import com.gaoshin.job.bean.JobConfDetails;
+import com.gaoshin.job.bean.JobConfList;
 import com.gaoshin.job.bean.JobDependency;
 import com.gaoshin.job.bean.JobDependencyDetails;
 import com.gaoshin.job.bean.JobDetails;
 import com.gaoshin.job.bean.JobList;
 import com.gaoshin.job.bean.Task;
+import com.gaoshin.job.bean.TaskConfDetails;
 import com.gaoshin.job.bean.TaskDetails;
 import common.util.reflection.ReflectionUtil;
 
@@ -96,16 +98,23 @@ public class JobServiceImpl implements JobService {
         JobEntity entity = jobDao.getEntity(JobEntity.class, jobId);
         JobDetails bean = ReflectionUtil.copy(JobDetails.class, entity);
 
-        List<JobConfEntity> confList = jobDao.find(JobConfEntity.class, "from JobConfEntity where jobId=?", jobId);
+        List<JobConfEntity> confList = jobDao.find(JobConfEntity.class, "from JobConfEntity where ownerId=?", jobId);
         for(JobConfEntity jce : confList) {
             bean.getJobConfList().getList().add(ReflectionUtil.copy(JobConf.class, jce));
         }
         
         List<TaskEntity> taskList = jobDao.find(TaskEntity.class, "from TaskEntity where jobId=?", jobId);
         for(TaskEntity te : taskList) {
-            bean.getTaskList().getList().add(ReflectionUtil.copy(Task.class, te));
+            TaskDetails td = ReflectionUtil.copy(TaskDetails.class, te);
+            List<JobConfEntity> taskConfs = jobDao.find(JobConfEntity.class, "from JobConfEntity where ownerId=?", te.getId());
+            JobConfList taskConfList = new JobConfList();
+            for(JobConfEntity jce : taskConfs) {
+                taskConfList.getList().add(ReflectionUtil.copy(JobConf.class, jce));
+            }
+            td.setTaskConfList(taskConfList);
+            bean.getTaskDetailsList().getItems().add(td);
         }
-        Collections.sort(bean.getTaskList().getList(), new Comparator<Task>() {
+        Collections.sort(bean.getTaskDetailsList().getItems(), new Comparator<Task>() {
             @Override
             public int compare(Task arg0, Task arg1) {
                 return arg0.getExecOrder() - arg1.getExecOrder();
@@ -145,7 +154,7 @@ public class JobServiceImpl implements JobService {
     public JobConfDetails getJobConfDetails(String jobConfId) {
         JobConfEntity entity = jobDao.getEntity(JobConfEntity.class, jobConfId);
         JobConfDetails details = ReflectionUtil.copy(JobConfDetails.class, entity);
-        details.setJob(getJob(entity.getJobId()));
+        details.setJob(getJob(entity.getOwnerId()));
         return details;
     }
 
@@ -246,5 +255,16 @@ public class JobServiceImpl implements JobService {
         JobEntity entity = ReflectionUtil.copy(JobEntity.class, job);
         jobDao.merge(entity);
         return job;
+    }
+
+    @Override
+    public TaskConfDetails getTaskConfDetails(String confId) {
+        JobConfEntity entity = jobDao.getEntity(JobConfEntity.class, confId);
+        TaskEntity taskEntity = jobDao.getEntity(TaskEntity.class, entity.getOwnerId());
+        TaskDetails taskDetails = ReflectionUtil.copy(TaskDetails.class, taskEntity);
+        taskDetails.setJob(getJob(taskEntity.getJobId()));
+        TaskConfDetails details = ReflectionUtil.copy(TaskConfDetails.class, entity);
+        details.setTaskDetails(taskDetails);
+        return details;
     }
 }

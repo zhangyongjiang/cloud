@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gaoshin.cloud.web.bean.GenericResponse;
-import com.gaoshin.cloud.web.bean.StringList;
 import com.gaoshin.job.bean.Job;
 import com.gaoshin.job.bean.JobConf;
 import com.gaoshin.job.bean.JobConfDetails;
@@ -23,7 +22,9 @@ import com.gaoshin.job.bean.JobExecution;
 import com.gaoshin.job.bean.JobExecutionDetails;
 import com.gaoshin.job.bean.JobExecutionDetailsList;
 import com.gaoshin.job.bean.JobList;
+import com.gaoshin.job.bean.KeyValueList;
 import com.gaoshin.job.bean.Task;
+import com.gaoshin.job.bean.TaskConfDetails;
 import com.gaoshin.job.bean.TaskDetails;
 import common.util.web.JerseyBaseResource;
 
@@ -91,6 +92,12 @@ public class JobResource extends JerseyBaseResource {
         return jobService.getJobConfDetails(jobConfId);
     }
     
+    @GET
+    @Path("task-conf/details") 
+    public TaskConfDetails getTaskConfDetails(@QueryParam("id") String confId) {
+        return jobService.getTaskConfDetails(confId);
+    }
+    
     @POST
     @Path("job-conf/update") 
     public GenericResponse updateJobConf(JobConf jobConf) {
@@ -107,7 +114,7 @@ public class JobResource extends JerseyBaseResource {
 
     @GET
     @Path("task/type-list") 
-    public StringList listTaskType(@QueryParam("id") String taskId) {
+    public KeyValueList listTaskType(@QueryParam("id") String taskId) {
         return jobExecutionManager.listTaskType();
     }
 

@@ -17,10 +17,10 @@ public class RuntimeJobConfEntity {
     private String id;
     
 	@Column(length=32)
-	private String ckey;
+	private String name;
 	
 	@Column(length=2047)
-	private String cvalue;
+	private String value;
 	
 	@Column
 	private boolean password = false;
@@ -32,8 +32,8 @@ public class RuntimeJobConfEntity {
 	}
 	
 	public RuntimeJobConfEntity(String key, String value) {
-		this.ckey = key;
-		this.cvalue = value;
+		this.name = key;
+		this.value = value;
 	}
 	
 	public void setPassword(boolean isPassword) {
@@ -44,20 +44,20 @@ public class RuntimeJobConfEntity {
 		return password;
 	}
 
-    public String getCkey() {
-        return ckey;
+    public String getName() {
+        return name;
     }
 
-    public void setCkey(String ckey) {
-        this.ckey = ckey;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCvalue() {
-        return cvalue;
+    public String getValue() {
+        return value;
     }
 
-    public void setCvalue(String cvalue) {
-        this.cvalue = cvalue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getJobExecutionId() {

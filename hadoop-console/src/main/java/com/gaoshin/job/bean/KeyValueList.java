@@ -12,20 +12,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.PROPERTY) 
 @XmlType(propOrder="")
 public class KeyValueList {
-	private List<KeyValue> item;
+	private List<KeyValue> items = new ArrayList<KeyValue>();
 
-	public void setItem(List<KeyValue> item) {
-		this.item = item;
-	}
+    public List<KeyValue> getItems() {
+        return items;
+    }
 
-	public List<KeyValue> getItem() {
-		return item;
-	}
-
-	public List<KeyValue> getItemCreated() {
-		if(item == null)
-			item = new ArrayList<KeyValue>();
-		return item;
-	}
+    public void setItems(List<KeyValue> items) {
+        this.items = items;
+    }
 
 }

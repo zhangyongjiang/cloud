@@ -12,8 +12,8 @@
 
 <form method="post" onSubmit="return createJobConf();">
 	<table>
-		<o:text-input-tr label="Key" id="ckey" ></o:text-input-tr>
-		<o:text-input-tr label="Value" id="cvalue" size="80"></o:text-input-tr>
+		<o:text-input-tr label="Key" id="name" ></o:text-input-tr>
+		<o:text-input-tr label="Value" id="value" size="80"></o:text-input-tr>
 		<o:text-input-tr label="Is Password?" id="password"></o:text-input-tr>
 		<o:submit-tr value="Add" cancel="window.history.back()"></o:submit-tr>
 	</table>
@@ -22,10 +22,10 @@
 <script type="text/javascript">
 function createJobConf() {
 	var req = {
-		ckey: $("#ckey").val(),
-		cvalue: $("#cvalue").val(),
+		name: $("#name").val(),
+		value: $("#value").val(),
 		password: $("#password").val(),
-		jobId: "<%=jobId%>"
+		ownerId: "<%=jobId%>"
 	};
 	
     var json = JSON.stringify(req);

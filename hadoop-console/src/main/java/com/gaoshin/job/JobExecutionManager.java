@@ -1,12 +1,12 @@
 package com.gaoshin.job;
 
-import com.gaoshin.cloud.web.bean.StringList;
 import com.gaoshin.job.bean.JobExecutionDetails;
 import com.gaoshin.job.bean.JobExecutionDetailsList;
+import com.gaoshin.job.bean.KeyValueList;
 
 public interface JobExecutionManager {
 
-    StringList listTaskType();
+    KeyValueList listTaskType();
 
     void taskExecutionSucceed(String currentTaskExecutionEntityId);
 

@@ -5,24 +5,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class JobExecutionConf {
     private String id;
-	private String ckey;
-	private String cvalue;
+	private String name;
+	private String value;
 	private String jobExecutionId;
 
-    public String getCkey() {
-        return ckey;
+    public String getName() {
+        return name;
     }
 
-    public void setCkey(String ckey) {
-        this.ckey = ckey;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCvalue() {
-        return cvalue;
+    public String getValue() {
+        return value;
     }
 
-    public void setCvalue(String cvalue) {
-        this.cvalue = cvalue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getId() {

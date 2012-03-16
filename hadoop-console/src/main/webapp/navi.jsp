@@ -11,13 +11,12 @@
 		<li><a href='<c:url value="/hadoop/hdfs/info/index.jsp.oo?path=/"/>'>Hadoop File Explorer</a></li>
 		<li><a href='<c:url value="/job/create/index.jsp.oo"/>'>New Work Flow</a></li>
 		<li><a href='<c:url value="/job/list/index.jsp.oo"/>'>Work Flow List</a></li>
-		<li><a href='<c:url value="/job/job-conf/create/index.jsp.oo?jobId=0"/>'>Configuration</a></li>
+		<li><a href='<c:url value="/conf/list/index.jsp.oo"/>'>Settings</a></li>
 	</ul>
 
 	<h3 style="margin-top: 16px">Admin</h3>
 	<ul class="submenu">
 		<li><a href='<c:url value=""/>'>Account</a></li>
-		<li><a href='<c:url value="/conf/list/index.jsp.oo"/>'>Settings</a></li>
 		<li><a href='<c:url value=""/>'>Support</a></li>
 	</ul>
 

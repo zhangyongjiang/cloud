@@ -17,23 +17,23 @@ public class JobConfEntity {
     private String id;
     
 	@Column(length=32)
-	private String ckey;
+	private String name;
 	
 	@Column(length=2047)
-	private String cvalue;
+	private String value;
 	
 	@Column
 	private boolean password = false;
 	
     @Column(length=64)
-    private String jobId;
+    private String ownerId;
 
 	public JobConfEntity() {
 	}
 	
 	public JobConfEntity(String key, String value) {
-		this.ckey = key;
-		this.cvalue = value;
+		this.name = key;
+		this.value = value;
 	}
 	
 	public void setPassword(boolean isPassword) {
@@ -44,20 +44,20 @@ public class JobConfEntity {
 		return password;
 	}
 
-    public String getCkey() {
-        return ckey;
+    public String getName() {
+        return name;
     }
 
-    public void setCkey(String ckey) {
-        this.ckey = ckey;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCvalue() {
-        return cvalue;
+    public String getValue() {
+        return value;
     }
 
-    public void setCvalue(String cvalue) {
-        this.cvalue = cvalue;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getId() {
@@ -68,11 +68,11 @@ public class JobConfEntity {
         this.id = id;
     }
 
-    public String getJobId() {
-        return jobId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

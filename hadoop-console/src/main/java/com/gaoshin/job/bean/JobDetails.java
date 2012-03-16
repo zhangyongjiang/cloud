@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder="")
 public class JobDetails extends Job {
     private JobConfList jobConfList = new JobConfList();
-    private TaskList taskList = new TaskList();
+    private TaskDetailsList taskDetailsList = new TaskDetailsList();
     private JobDependencyList jobDependencyList = new JobDependencyList();
 
     public JobConfList getJobConfList() {
@@ -21,19 +21,19 @@ public class JobDetails extends Job {
         this.jobConfList = jobConfList;
     }
 
-    public TaskList getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(TaskList taskList) {
-        this.taskList = taskList;
-    }
-    
     public JobDependencyList getJobDependencyList() {
         return jobDependencyList;
     }
 
     public void setJobDependencyList(JobDependencyList jobDependencyList) {
         this.jobDependencyList = jobDependencyList;
+    }
+
+    public TaskDetailsList getTaskDetailsList() {
+        return taskDetailsList;
+    }
+
+    public void setTaskDetailsList(TaskDetailsList taskDetailsList) {
+        this.taskDetailsList = taskDetailsList;
     }
 }

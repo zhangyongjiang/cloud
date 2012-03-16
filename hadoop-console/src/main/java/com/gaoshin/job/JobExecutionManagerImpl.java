@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gaoshin.cloud.web.bean.StringList;
 import com.gaoshin.cloud.web.job.entity.JobDependencyEntity;
 import com.gaoshin.cloud.web.job.entity.JobEntity;
 import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
@@ -20,6 +19,8 @@ import com.gaoshin.cloud.web.job.entity.TaskExecutionEntity;
 import com.gaoshin.job.bean.Job;
 import com.gaoshin.job.bean.JobExecutionDetails;
 import com.gaoshin.job.bean.JobExecutionDetailsList;
+import com.gaoshin.job.bean.KeyValue;
+import com.gaoshin.job.bean.KeyValueList;
 import com.gaoshin.job.bean.RuntimeJobConf;
 import com.gaoshin.job.bean.TaskExecution;
 import com.gaoshin.job.bean.TaskProcessor;
@@ -121,11 +122,14 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public StringList listTaskType() {
+    public KeyValueList listTaskType() {
         Map<String, TaskProcessor> beansOfType = springContext.getBeansOfType(TaskProcessor.class);
-        StringList ret = new StringList();
+        KeyValueList ret = new KeyValueList();
         for(TaskProcessor tp : beansOfType.values()) {
-            ret.getList().add(tp.getName());
+            KeyValue kv = new KeyValue();
+            kv.setKey(tp.getClass().getName());
+            kv.setValue(tp.getName());
+            ret.getItems().add(kv);
         }
         return ret;
     }

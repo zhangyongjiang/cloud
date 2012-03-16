@@ -96,7 +96,7 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
 
     @Override
     public RuntimeJobConfEntity getJobExecutionConf(String jobExecutionId, String key) {
-        List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? and jece.ckey=?", jobExecutionId, key);
+        List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? and jece.name=?", jobExecutionId, key);
         return list.isEmpty() ? null : list.get(0);
     }
 

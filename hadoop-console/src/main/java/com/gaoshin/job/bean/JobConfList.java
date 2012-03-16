@@ -24,7 +24,7 @@ public class JobConfList {
     
     public JobConf search(String name) {
         for(JobConf jc : list) {
-            if(jc.getCkey().equals(name)) {
+            if(jc.getName().equals(name)) {
                 return jc;
             }
         }

@@ -8,6 +8,7 @@ import com.gaoshin.job.bean.JobDependencyDetails;
 import com.gaoshin.job.bean.JobDetails;
 import com.gaoshin.job.bean.JobList;
 import com.gaoshin.job.bean.Task;
+import com.gaoshin.job.bean.TaskConfDetails;
 import com.gaoshin.job.bean.TaskDetails;
 
 public interface JobService {
@@ -47,4 +48,6 @@ public interface JobService {
     void enableJob(String jobId, boolean enable);
 
     Job update(Job job);
+
+    TaskConfDetails getTaskConfDetails(String confId);
 }

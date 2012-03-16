@@ -12,7 +12,6 @@ import com.gaoshin.cloud.web.job.entity.TaskExecutionEntity;
 import com.gaoshin.job.bean.GaoshinProcess;
 import com.gaoshin.job.bean.TaskProcessor;
 import com.gaoshin.job.plugin.BaseTaskProcessor;
-
 import common.util.reflection.ReflectionUtil;
 
 @Service("hadoopTaskProcessor")

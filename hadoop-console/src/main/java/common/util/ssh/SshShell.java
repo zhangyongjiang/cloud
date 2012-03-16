@@ -34,15 +34,25 @@ public class SshShell {
 		authClient = auth;
 	}
 
-	public SshShell(String host, String keyFile) throws Exception {
-	    this.host = host;
+    public SshShell(String host, String keyFile) throws Exception {
+        this.host = host;
         sshClient = new SshClient();
         
-		SshPrivateKeyFile file = SshPrivateKeyFile.parse(new File(keyFile));
-		PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
-		auth.setKey(file.toPrivateKey(null));
-		authClient = auth;
-	}
+        SshPrivateKeyFile file = SshPrivateKeyFile.parse(new File(keyFile));
+        PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
+        auth.setKey(file.toPrivateKey(null));
+        authClient = auth;
+    }
+
+    public SshShell(String host, byte[] key) throws Exception {
+        this.host = host;
+        sshClient = new SshClient();
+        
+        SshPrivateKeyFile file = SshPrivateKeyFile.parse(key);
+        PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
+        auth.setKey(file.toPrivateKey(null));
+        authClient = auth;
+    }
 
 	public void open() throws Exception {
         sshClient.connect(host, new IgnoreHostKeyVerification());

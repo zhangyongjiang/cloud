@@ -1,4 +1,4 @@
-<%@page import="com.gaoshin.configuration.Configuration"%>
+<%@page import="com.gaoshin.job.bean.JobConf"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 <%@ taglib tagdir="/WEB-INF/tags/gaoshin" prefix="g" %>
@@ -10,11 +10,16 @@
 	    request.getRequestDispatcher(url).include(request, response);
 	}
 	else {
-	    request.setAttribute("it", new Configuration());
+	    request.setAttribute("it", new JobConf());
 	}
 %>
 
+<c:if test="${empty it.id }">
 <div class="page-header">Create New Configuration</div>
+</c:if>
+<c:if test="${not empty it.id }">
+<div class="page-header">Edit Configuration</div>
+</c:if>
 
 <form method="post" onSubmit="return createConf();">
 	<table>

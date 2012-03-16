@@ -45,8 +45,8 @@
 <div style="float:left;">
 		<table style="border:solid 1px blue;margin-bottom:16px;">
 			<c:forEach var="conf" items="${it.jobConfList.list}">
-				<o:tr-label-value label="${conf.ckey}" >
-					<a href='<c:url value="/job/job-conf/edit/index.jsp.oo?id=${conf.id}"/>'>${conf.cvalue}</a> 
+				<o:tr-label-value label="${conf.name}" >
+					<a href='<c:url value="/job/job-conf/edit/index.jsp.oo?id=${conf.id}"/>'>${conf.value}</a> 
 					<div style="float:right;margin-left:40px;">
 						<a href="#" onClick='deleteJobConf("${conf.id}")'><img src='<c:url value="/images/delete_icon.gif"/>' border="0"/></a>
 					</div>
@@ -70,7 +70,7 @@
 
 	<c:set var="addTaskUrl"><a href='<c:url value="/job/task/create/index.jsp.oo?jobId=${it.id}"/>'>Add</a></c:set>
 	<o:tr-label-value label="Tasks<br/></br>${addTaskUrl}" >
-			<c:forEach var="task" items="${it.taskList.list}">
+			<c:forEach var="task" items="${it.taskDetailsList.items}">
 				<c:set var="color"><c:if test="${task.errorHandlingTask}">red</c:if><c:if test="${task.errorHandlingTask == false}">blue</c:if></c:set>
 				<table style="width:100%;border:solid 1px ${color};margin-bottom:16px;">
 					<o:tr-label-value label="Task ID" >
@@ -87,6 +87,12 @@
 					<o:tr-label-value label="Retry Interval" >${task.retryInterval} second(s)</o:tr-label-value>
 					<o:tr-label-value label="Is Error Handling Task?" >${task.errorHandlingTask}</o:tr-label-value>
 					<o:tr-label-value label="Description" >${task.description}</o:tr-label-value>
+					<o:tr-label-value label="Task Configuration" >
+						<c:forEach var="taskConf" items="${task.taskConfList.list}">
+							<a href='<c:url value="/job/task/conf/edit/index.jsp.oo?id="/>${taskConf.id}'>${taskConf.name } = ${taskConf.value }</a> <br/>
+						</c:forEach>
+						<a href='<c:url value="/job/task/conf/create/index.jsp.oo?taskId=${task.id}"/>'>Add</a>
+					</o:tr-label-value>
 				</table>
 			</c:forEach>
 	</o:tr-label-value>

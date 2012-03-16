@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.springframework.context.ApplicationContext;
 
+import com.gaoshin.cloud.web.job.entity.JobConfEntity;
 import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
 import com.gaoshin.cloud.web.job.entity.Parameter;
 import com.gaoshin.cloud.web.job.entity.RuntimeJobConfEntity;
@@ -34,17 +35,19 @@ public abstract class BaseProcess implements GaoshinProcess{
     protected JobExecutionEntity jobExecutionEntity;
     protected TaskEntity taskEntity;
     protected TaskExecutionEntity taskExecutionEntity;
+    protected List<JobConfEntity> jobConfList;
     
     protected JobDao jobDao;
     protected TaskExecutionTryEntity currentTry;
 
     public BaseProcess(ApplicationContext springContext, JobExecutionEntity jee, TaskEntity te, TaskExecutionEntity tee) {
         this.springContext = springContext;
+        jobDao = springContext.getBean(JobDao.class);
+        
         this.jobExecutionEntity = jee;
         this.taskEntity = te;
         this.taskExecutionEntity = tee;
-        
-        jobDao = springContext.getBean(JobDao.class);
+        this.jobConfList = jobDao.getJobConfList(jee.getJobId());
     }
 
     protected void error(Exception e) {
@@ -99,7 +102,7 @@ public abstract class BaseProcess implements GaoshinProcess{
             List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
             Map<String, String> map = new HashMap<String, String>();
             for(RuntimeJobConfEntity jece : confList) {
-                map.put(jece.getCkey(), jece.getCvalue());
+                map.put(jece.getName(), jece.getValue());
             }
             String tmpKey = UUID.randomUUID().toString();
             map.put(tmpKey, jobExecutionEntity.getNote());
@@ -216,7 +219,7 @@ public abstract class BaseProcess implements GaoshinProcess{
         List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
         Map<String, String> map = new HashMap<String, String>();
         for(RuntimeJobConfEntity jece : confList) {
-            map.put(jece.getCkey(), jece.getCvalue());
+            map.put(jece.getName(), jece.getValue());
         }
         
         String tmpKey = UUID.randomUUID().toString();
@@ -320,13 +323,13 @@ public abstract class BaseProcess implements GaoshinProcess{
         RuntimeJobConfEntity jece = jobDao.getJobExecutionConf(jobExecutionEntity.getId(), key);
         if(jece == null) {
             jece = new RuntimeJobConfEntity();
-            jece.setCkey(key);
-            jece.setCvalue(value);
+            jece.setName(key);
+            jece.setValue(value);
             jece.setJobExecutionId(jobExecutionEntity.getId());
             jobDao.saveEntity(jece);
         }
         else {
-            jece.setCvalue(value);
+            jece.setValue(value);
             jobDao.saveEntity(jece);
         }
     }
@@ -403,5 +406,31 @@ public abstract class BaseProcess implements GaoshinProcess{
             ret[i] = argList.get(i);
         }
         return ret;
+    }
+    
+    public JobConfEntity getConf(String key) {
+        for(JobConfEntity entity : jobConfList) { 
+            if(entity.getName().equals(key)) {
+                return entity;
+            }
+        }
+        return null;
+    }
+    
+    public String getConfString(String key) {
+        for(JobConfEntity entity : jobConfList) { 
+            if(entity.getName().equals(key)) {
+                return entity.getValue();
+            }
+        }
+        return null;
+    }
+    
+    public int getConfInt(String key, int defaultValue) {
+        String value = getConfString(key);
+        if(value == null || value.trim().length() == 0) {
+            return defaultValue;
+        }
+        return Integer.parseInt(value);
     }
 }

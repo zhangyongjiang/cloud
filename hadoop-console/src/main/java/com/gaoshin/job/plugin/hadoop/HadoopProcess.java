@@ -9,12 +9,10 @@ import org.springframework.context.ApplicationContext;
 import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
 import com.gaoshin.cloud.web.job.entity.TaskEntity;
 import com.gaoshin.cloud.web.job.entity.TaskExecutionEntity;
-import com.gaoshin.job.bean.GaoshinProcess;
 import com.gaoshin.job.plugin.BaseProcess;
-
 import common.util.ssh.SshShell;
 
-public class HadoopProcess extends BaseProcess implements GaoshinProcess {
+public class HadoopProcess extends BaseProcess {
     private SshShell sshShell;
 
     public HadoopProcess(ApplicationContext springContext, JobExecutionEntity jee, TaskEntity te, TaskExecutionEntity tee) {

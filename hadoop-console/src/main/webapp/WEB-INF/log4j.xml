@@ -9,7 +9,7 @@
 	</appender>
 
 	<root>
-		<priority value="DEBUG" />
+		<!-- priority value="DEBUG" /-->
 		<appender-ref ref="CONSOLE_APPENDER" />
 	</root>
 

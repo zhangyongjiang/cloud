@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gaoshin.cloud.web.bean.BusinessException;
 import com.gaoshin.cloud.web.bean.ServiceError;
+import com.gaoshin.cloud.web.job.entity.JobConfEntity;
+import com.gaoshin.job.bean.JobConf;
 import common.util.reflection.ReflectionUtil;
 
 @Service("confService")
@@ -18,10 +20,10 @@ public class ConfServiceImpl implements ConfService {
     private ConfDao confDao;
 
     @Override
-    public Configuration set(String key, String value) {
-        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "name", key);
+    public JobConf set(String key, String value) {
+        JobConfEntity entity = confDao.getUniqueResult(JobConfEntity.class, "name", key);
         if(entity == null) {
-            entity = new ConfigurationEntity();
+            entity = new JobConfEntity();
             entity.setName(key);
             entity.setValue(value);
             confDao.saveEntity(entity);
@@ -31,47 +33,47 @@ public class ConfServiceImpl implements ConfService {
             entity.setValue(value);
             confDao.merge(entity);
         }
-        return ReflectionUtil.copy(Configuration.class, entity);
+        return ReflectionUtil.copy(JobConf.class, entity);
     }
 
     @Override
-    public Configuration getByKey(String key) {
-        ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "name", key);
+    public JobConf getByKey(String key) {
+        JobConfEntity entity = confDao.getUniqueResult(JobConfEntity.class, "name", key);
         if(entity == null) {
             return null;
         }
         
-        return ReflectionUtil.copy(Configuration.class, entity);
+        return ReflectionUtil.copy(JobConf.class, entity);
     }
 
     @Override
-    public List<Configuration> list() {
-        List<ConfigurationEntity> entities = confDao.find("from ConfigurationEntity");
-        List<Configuration> beans = new ArrayList<Configuration>();
-        for(ConfigurationEntity entity : entities) {
-            beans.add(ReflectionUtil.copy(Configuration.class, entity));
+    public List<JobConf> list() {
+        List<JobConfEntity> entities = confDao.find("from " + JobConfEntity.class.getSimpleName() + " conf where conf.ownerId is null");
+        List<JobConf> beans = new ArrayList<JobConf>();
+        for(JobConfEntity entity : entities) {
+            beans.add(ReflectionUtil.copy(JobConf.class, entity));
         }
         return beans;
     }
 
     @Override
     public void remove(String confid) {
-        ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
+        JobConfEntity entity = confDao.getEntity(JobConfEntity.class, confid);
         if(entity == null) 
             throw new BusinessException(ServiceError.NotFound);
         confDao.deleteEntity(entity);
     }
 
     @Override
-    public Configuration get(String confid) {
-        ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
+    public JobConf get(String confid) {
+        JobConfEntity entity = confDao.getEntity(JobConfEntity.class, confid);
         if(entity == null) 
             throw new BusinessException(ServiceError.NotFound);
-        return ReflectionUtil.copy(Configuration.class, entity);
+        return ReflectionUtil.copy(JobConf.class, entity);
     }
 
     @Override
-    public Configuration set(Configuration conf) {
+    public JobConf set(JobConf conf) {
         return set(conf.getName(), conf.getValue());
     }
 

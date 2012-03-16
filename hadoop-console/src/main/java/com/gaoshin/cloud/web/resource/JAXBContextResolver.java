@@ -14,6 +14,7 @@ import com.gaoshin.job.bean.JobExecutionDetails;
 import com.gaoshin.job.bean.JobExecutionDetailsList;
 import com.gaoshin.job.bean.JobExecutionList;
 import com.gaoshin.job.bean.JobList;
+import com.gaoshin.job.bean.TaskDetailsList;
 import com.gaoshin.job.bean.TaskList;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.sun.jersey.api.json.JSONJAXBContext;
@@ -31,6 +32,7 @@ public class JAXBContextResolver implements ContextResolver<JAXBContext> {
             JobExecutionDetails.class,
             JobConfList.class,
             TaskList.class,
+            TaskDetailsList.class,
             JobDependencyList.class,
             JobDetails.class,
             };

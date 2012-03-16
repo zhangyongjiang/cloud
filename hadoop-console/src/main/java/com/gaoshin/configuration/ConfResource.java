@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gaoshin.cloud.web.bean.GenericResponse;
+import com.gaoshin.job.bean.JobConf;
 import common.util.web.JerseyBaseResource;
 
 @Path("/ws/v1/conf")
@@ -22,7 +23,7 @@ public class ConfResource extends JerseyBaseResource {
 
     @POST
     @Path("/set")
-    public Configuration set(Configuration conf) {
+    public JobConf set(JobConf conf) {
         return confService.set(conf);
     }
     
@@ -35,13 +36,13 @@ public class ConfResource extends JerseyBaseResource {
     
     @GET
     @Path("/get/{id}")
-    public Configuration get(@PathParam("id") String confid) {
+    public JobConf get(@PathParam("id") String confid) {
         return confService.get(confid);
     }
     
     @GET
     @Path("list")
-    public List<Configuration> list() {
+    public List<JobConf> list() {
         return confService.list();
     }
 }

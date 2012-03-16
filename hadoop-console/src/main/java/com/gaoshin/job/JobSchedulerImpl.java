@@ -122,7 +122,7 @@ public class JobSchedulerImpl implements JobScheduler {
         JobConf timeConf = confList.search(JobConfKey.Timestamp.name());
         long startTime = System.currentTimeMillis() + 5000;
         if(timeConf != null) {
-            startTime = Long.parseLong(timeConf.getCvalue());
+            startTime = Long.parseLong(timeConf.getValue());
         }
         else {
             timeConf = new JobConf(JobConfKey.Timestamp.name(), String.valueOf(startTime));
@@ -133,11 +133,11 @@ public class JobSchedulerImpl implements JobScheduler {
         jobDao.saveEntity(jee);
         
         Map<String, String> jobConfs = getDefaultJobConfs(jobEntity);
-        jobConfs.put(timeConf.getCkey(), timeConf.getCvalue());
+        jobConfs.put(timeConf.getName(), timeConf.getValue());
         jobConfs.put(JobConfKey.JobId.name(), String.valueOf(jobId));
         jobConfs.put(JobConfKey.JobExecutionId.name(), String.valueOf(jee.getId()));
         for(JobConf jc : confList.getList()) {
-            jobConfs.put(jc.getCkey(), jc.getCvalue());
+            jobConfs.put(jc.getName(), jc.getValue());
         }
         for(Entry<String, String> entry : jobConfs.entrySet()) {
             RuntimeJobConfEntity entity = new RuntimeJobConfEntity(entry.getKey(), entry.getValue());
@@ -157,12 +157,12 @@ public class JobSchedulerImpl implements JobScheduler {
         // global conf
         List<JobConfEntity> confList = jobDao.getJobConfList(null);
         for(JobConfEntity jce : confList) {
-            confMap.put(jce.getCkey(), jce.getCvalue());
+            confMap.put(jce.getName(), jce.getValue());
         }
         
         confList = jobDao.getJobConfList(jobEntity.getId());
         for(JobConfEntity jce : confList) {
-            confMap.put(jce.getCkey(), jce.getCvalue());
+            confMap.put(jce.getName(), jce.getValue());
         }
         
         return confMap;

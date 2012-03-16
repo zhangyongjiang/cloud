@@ -7,6 +7,7 @@ import org.apache.hadoop.hdfs.DFSClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gaoshin.configuration.ConfService;
+import com.gaoshin.job.bean.JobConf;
 
 public class HadoopBaseService {
     @Autowired
@@ -16,7 +17,7 @@ public class HadoopBaseService {
     
     public String getHdfsUrl() {
         if(hdfsUrl == null) {
-            com.gaoshin.configuration.Configuration conf = confService.get("hadoop.dfs.uri");
+            JobConf conf = confService.get("hadoop.dfs.uri");
             if(conf != null) {
                 hdfsUrl = conf.getValue();
             }
