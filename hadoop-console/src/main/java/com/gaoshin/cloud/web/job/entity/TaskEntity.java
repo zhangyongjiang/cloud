@@ -1,29 +1,27 @@
 package com.gaoshin.cloud.web.job.entity;
 
-import java.util.logging.Logger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table
 public class TaskEntity {
-	private static final Logger logger = Logger.getLogger(TaskEntity.class.getName());
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
 
 	@Column(length=64, nullable=false)
 	private String name;
 
-	@Column
-	private Long jobId;
+	@Column(length=64)
+	private String jobId;
 
 	@Column(length = 1024, nullable=false)
 	private String handler;
@@ -116,14 +114,6 @@ public class TaskEntity {
 		return disabled;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -132,11 +122,11 @@ public class TaskEntity {
 		return name;
 	}
 
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long cronJobId) {
+    public void setJobId(String cronJobId) {
         this.jobId = cronJobId;
     }
 
@@ -146,5 +136,13 @@ public class TaskEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

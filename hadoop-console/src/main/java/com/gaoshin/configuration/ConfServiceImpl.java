@@ -35,7 +35,7 @@ public class ConfServiceImpl implements ConfService {
     }
 
     @Override
-    public Configuration get(String key) {
+    public Configuration getByKey(String key) {
         ConfigurationEntity entity = confDao.getUniqueResult(ConfigurationEntity.class, "name", key);
         if(entity == null) {
             return null;
@@ -55,7 +55,7 @@ public class ConfServiceImpl implements ConfService {
     }
 
     @Override
-    public void remove(Long confid) {
+    public void remove(String confid) {
         ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
         if(entity == null) 
             throw new BusinessException(ServiceError.NotFound);
@@ -63,7 +63,7 @@ public class ConfServiceImpl implements ConfService {
     }
 
     @Override
-    public Configuration get(Long confid) {
+    public Configuration get(String confid) {
         ConfigurationEntity entity = confDao.getEntity(ConfigurationEntity.class, confid);
         if(entity == null) 
             throw new BusinessException(ServiceError.NotFound);

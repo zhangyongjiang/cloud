@@ -3,17 +3,18 @@ package com.gaoshin.cloud.web.job.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
 public class JobConfEntity {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long   id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
     
 	@Column(length=32)
 	private String ckey;
@@ -24,8 +25,8 @@ public class JobConfEntity {
 	@Column
 	private boolean password = false;
 	
-	@Column(nullable = false)
-	private Long jobId;
+	@Column(nullable = false, length=64)
+	private String jobId;
 
 	public JobConfEntity() {
 	}
@@ -35,15 +36,6 @@ public class JobConfEntity {
 		this.cvalue = value;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@XmlTransient
-	public Long getId() {
-		return id;
-	}
-
 	public void setPassword(boolean isPassword) {
 		this.password = isPassword;
 	}
@@ -51,14 +43,6 @@ public class JobConfEntity {
 	public boolean isPassword() {
 		return password;
 	}
-
-    public Long getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(Long cronJobId) {
-        this.jobId = cronJobId;
-    }
 
     public String getCkey() {
         return ckey;
@@ -74,5 +58,21 @@ public class JobConfEntity {
 
     public void setCvalue(String cvalue) {
         this.cvalue = cvalue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 }

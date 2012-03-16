@@ -3,16 +3,18 @@ package com.gaoshin.hadoop.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "authorities")
 public class UserAuthority {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long   id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
     
     @Column(name="username", nullable = false, length=128)
     private String username;
@@ -36,11 +38,11 @@ public class UserAuthority {
         this.username = username;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

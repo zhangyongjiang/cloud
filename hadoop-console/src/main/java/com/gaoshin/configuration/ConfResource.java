@@ -28,14 +28,14 @@ public class ConfResource extends JerseyBaseResource {
     
     @POST
     @Path("/remove/{id}")
-    public GenericResponse remove(@PathParam("id") Long confid) {
+    public GenericResponse remove(@PathParam("id") String confid) {
         confService.remove(confid);
         return new GenericResponse();
     }
     
     @GET
     @Path("/get/{id}")
-    public Configuration get(@PathParam("id") Long confid) {
+    public Configuration get(@PathParam("id") String confid) {
         return confService.get(confid);
     }
     

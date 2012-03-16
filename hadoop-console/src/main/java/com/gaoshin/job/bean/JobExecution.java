@@ -4,8 +4,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class JobExecution {
-	private Long id;
-	private Long jobId;
+	private String id;
+	private String jobId;
 	private WorkStatus status;
 	private Long scheduledStartTime;
 	private Long expectedDuration;
@@ -15,19 +15,11 @@ public class JobExecution {
 	private String notificationEmail;
     private String note;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 
@@ -93,6 +85,14 @@ public class JobExecution {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

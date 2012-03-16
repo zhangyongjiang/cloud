@@ -4,40 +4,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class JobDependency {
-	private Long id;
-	private Long jobId;
-	private Long upstreamJobId;
-	private long timeDiff;
+    private String id;
+    private String jobId;
+    private String upstreamJobId;
+    private long timeDiff;
 
-	public Long getId() {
-		return id;
-	}
+    public void setTimeDiff(long timeDiff) {
+        this.timeDiff = timeDiff;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public long getTimeDiff() {
+        return timeDiff;
+    }
 
-	public void setTimeDiff(long timeDiff) {
-		this.timeDiff = timeDiff;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public long getTimeDiff() {
-		return timeDiff;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 
-    public Long getUpstreamJobId() {
+    public String getUpstreamJobId() {
         return upstreamJobId;
     }
 
-    public void setUpstreamJobId(Long upstreamJobId) {
+    public void setUpstreamJobId(String upstreamJobId) {
         this.upstreamJobId = upstreamJobId;
     }
 

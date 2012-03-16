@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface ConfService {
     Configuration set(String key, String value);
-    Configuration get(String key);
+    Configuration getByKey(String key);
     List<Configuration> list();
-    void remove(Long confid);
-    Configuration get(Long confid);
+    void remove(String confid);
+    Configuration get(String confid);
     Configuration set(Configuration conf);
 }

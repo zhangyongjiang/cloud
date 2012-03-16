@@ -16,35 +16,35 @@ public interface JobService {
 
     JobList list();
 
-    void delete(Long jobId);
+    void delete(String jobId);
 
-    JobDetails getJobDetails(Long jobId);
+    JobDetails getJobDetails(String jobId);
 
     JobConf createJobConf(JobConf jobConf);
 
-    JobConfDetails getJobConfDetails(Long jobConfId);
+    JobConfDetails getJobConfDetails(String jobConfId);
 
     void updateJobConfDetails(JobConf jobConf);
 
-    void deleteJobConf(Long jobConfId);
+    void deleteJobConf(String jobConfId);
 
     Task createTask(Task task);
 
-    TaskDetails getTaskDetails(Long taskId);
+    TaskDetails getTaskDetails(String taskId);
 
     void updateTaskDetails(Task task);
 
-    void deleteTask(Long taskId);
+    void deleteTask(String taskId);
 
     JobDependency createJobDependency(JobDependency jobDependency);
 
-    JobDependencyDetails getJobDependencyDetails(Long jobDependencyId);
+    JobDependencyDetails getJobDependencyDetails(String jobDependencyId);
 
     void updateJobDependencyDetails(JobDependency jobDependency);
 
-    void deleteJobDependency(Long jobDependencyId);
+    void deleteJobDependency(String jobDependencyId);
 
-    void enableJob(Long jobId, boolean enable);
+    void enableJob(String jobId, boolean enable);
 
     Job update(Job job);
 }

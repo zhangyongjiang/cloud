@@ -106,7 +106,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     private boolean areUpstreamsReady(JobExecutionEntity jee) {
-        Long jobId = jee.getJobId();
+        String jobId = jee.getJobId();
         long scheduledStartTime = jee.getScheduledStartTime();
         List<JobDependencyEntity> upstreamDependencies = jobDao.getDependencies(jobId);
         for(JobDependencyEntity jde : upstreamDependencies) {
@@ -131,7 +131,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public void taskExecutionSucceed(Long taskExecutionEntityId) {
+    public void taskExecutionSucceed(String taskExecutionEntityId) {
         TaskExecutionEntity tee = jobDao.getEntity(TaskExecutionEntity.class, taskExecutionEntityId);
         tee.setDuration((System.currentTimeMillis() - tee.getStartTime()));
         tee.setStatus(WorkStatus.Succeed);
@@ -147,7 +147,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
         }
     }
 
-    private TaskEntity getNextTask(Long jobExecutionId, int execOrder, Integer nextTaskExecOrder) {
+    private TaskEntity getNextTask(String jobExecutionId, int execOrder, Integer nextTaskExecOrder) {
         JobExecutionEntity jee = jobDao.getEntity(JobExecutionEntity.class, jobExecutionId);
         JobEntity je = jobDao.getEntity(JobEntity.class, jee.getJobId());
         List<TaskEntity> tasks = jobDao.getOrderedJobTasks(je.getId());
@@ -175,18 +175,18 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public void taskExecutionFailed(Long taskExecutionEntityId) {
+    public void taskExecutionFailed(String taskExecutionEntityId) {
         TaskExecutionEntity tee = jobDao.getEntity(TaskExecutionEntity.class, taskExecutionEntityId);
         tee.setDuration((System.currentTimeMillis() - tee.getStartTime()));
         tee.setStatus(WorkStatus.Failed);
         jobDao.merge(tee);
         
-        Long jobExecutionId = tee.getJobExecutionId();
+        String jobExecutionId = tee.getJobExecutionId();
         jobFailed(jobExecutionId);
     }
 
     @Override
-    public void jobFailed(Long jobExecutionId) {
+    public void jobFailed(String jobExecutionId) {
         JobExecutionEntity jee = jobDao.getEntity(JobExecutionEntity.class, jobExecutionId);
         jee.setDuration((System.currentTimeMillis() - jee.getStartTime()));
         jee.setStatus(WorkStatus.Failed);
@@ -194,7 +194,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public void jobSucceed(Long jobExecutionId) {
+    public void jobSucceed(String jobExecutionId) {
         JobExecutionEntity jee = jobDao.getEntity(JobExecutionEntity.class, jobExecutionId);
         jee.setDuration((System.currentTimeMillis() - jee.getStartTime()));
         jee.setStatus(WorkStatus.Succeed);
@@ -203,7 +203,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public JobExecutionDetailsList getJobExecutionList(Long jobId, int offset, int size) {
+    public JobExecutionDetailsList getJobExecutionList(String jobId, int offset, int size) {
         JobEntity je = jobDao.getEntity(JobEntity.class, jobId);
         Job job = ReflectionUtil.copy(Job.class, je);
         
@@ -219,7 +219,7 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     }
 
     @Override
-    public JobExecutionDetails getJobExecutionDetails(Long jobExecutionId) {
+    public JobExecutionDetails getJobExecutionDetails(String jobExecutionId) {
         JobExecutionEntity entity = jobDao.getEntity(JobExecutionEntity.class, jobExecutionId);
         JobExecutionDetails details = ReflectionUtil.copy(JobExecutionDetails.class, entity);
         JobEntity jobEntity = jobDao.getEntity(JobEntity.class, entity.getJobId());

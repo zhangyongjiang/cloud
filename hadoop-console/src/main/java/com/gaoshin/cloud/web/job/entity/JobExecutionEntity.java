@@ -5,23 +5,24 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Transient;
 
-import com.gaoshin.job.bean.WorkStatus;
+import org.hibernate.annotations.GenericGenerator;
 
+import com.gaoshin.job.bean.WorkStatus;
 import common.util.Misc;
 
 @Entity
 public class JobExecutionEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
 
-	@Column(nullable = false)
-	private Long jobId;
+	@Column(nullable = false, length=64)
+	private String jobId;
 
 	@Column(length = 64)
 	@Enumerated(EnumType.STRING)
@@ -48,22 +49,6 @@ public class JobExecutionEntity {
 	@Column
     @Lob
 	private String note;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getJobId() {
-        return jobId;
-    }
-
-    public void setJobId(Long jobId) {
-        this.jobId = jobId;
-    }
 
     public WorkStatus getStatus() {
         return status;
@@ -137,6 +122,22 @@ public class JobExecutionEntity {
         else {
             note = note + "\n\n" + trace;
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
     }
 
 }

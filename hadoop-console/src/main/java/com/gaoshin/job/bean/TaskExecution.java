@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TaskExecution {
-	private Long id;
+	private String id;
 	private String name;
 	private String handler;
 	private String args;
@@ -18,18 +18,10 @@ public class TaskExecution {
 	private Integer nextTaskExecOrder;
 	private int actualNumOfTries = 0;
 	private int retryInterval = 0;
-	private Long jobExecutionId;
+	private String jobExecutionId;
 	private boolean isErrorHandlingTask = false;
 	private String logMsg;
 	private boolean disabled = false;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public void setHandler(String handler) {
 		this.handler = handler;
@@ -170,11 +162,20 @@ public class TaskExecution {
 		return nextTaskExecOrder;
 	}
 
-    public Long getJobExecutionId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getJobExecutionId() {
         return jobExecutionId;
     }
 
-    public void setJobExecutionId(Long jobExecutionId) {
+    public void setJobExecutionId(String jobExecutionId) {
         this.jobExecutionId = jobExecutionId;
     }
+
 }

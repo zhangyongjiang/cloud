@@ -60,14 +60,14 @@ public class TaskOutput {
 	}
 
 	public static class Dependent {
-		private long cronJobId;
+		private String cronJobId;
 		private String timepoint;
 
-		public long getCronJobId() {
+		public String getCronJobId() {
 			return cronJobId;
 		}
 
-		public void setCronJobId(long cronJobId) {
+		public void setCronJobId(String cronJobId) {
 			this.cronJobId = cronJobId;
 		}
 

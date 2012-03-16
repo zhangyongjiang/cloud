@@ -5,19 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.gaoshin.job.bean.WorkStatus;
 
 @Entity
 @Table
 public class TaskExecutionEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
 
 	@Column(length = 64)
 	private String name;
@@ -56,11 +58,11 @@ public class TaskExecutionEntity {
 	@Column
 	private int retryInterval = 0;
 
-    @Column(nullable=false)
-    private Long taskId;
+    @Column(nullable=false, length=64)
+    private String taskId;
 
-    @Column(nullable=false)
-    private Long jobExecutionId;
+    @Column(nullable=false, length=64)
+    private String jobExecutionId;
 
 	@Column
 	private boolean isErrorHandlingTask = false;
@@ -70,14 +72,6 @@ public class TaskExecutionEntity {
 
 	@Column
 	private boolean disabled = false;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public void setHandler(String handler) {
 		this.handler = handler;
@@ -218,14 +212,6 @@ public class TaskExecutionEntity {
 		return nextTaskExecOrder;
 	}
 
-    public Long getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
-    }
-
     public int getActualNumOfRetries() {
         return actualNumOfRetries;
     }
@@ -234,11 +220,27 @@ public class TaskExecutionEntity {
         this.actualNumOfRetries = actualNumOfRetries;
     }
 
-    public Long getJobExecutionId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getJobExecutionId() {
         return jobExecutionId;
     }
 
-    public void setJobExecutionId(Long jobExecutionId) {
+    public void setJobExecutionId(String jobExecutionId) {
         this.jobExecutionId = jobExecutionId;
     }
 }

@@ -104,14 +104,14 @@ public class JobSchedulerImpl implements JobScheduler {
     }
 
     @Override
-    public void enableJob(Long jobId, boolean enable) {
+    public void enableJob(String jobId, boolean enable) {
         if(enable) {
             schedule();
         }
     }
 
     @Override
-    public JobExecution runJob(Long jobId, JobConfList confList) {
+    public JobExecution runJob(String jobId, JobConfList confList) {
         JobEntity jobEntity = jobDao.getEntity(JobEntity.class, jobId);
         JobExecutionEntity jee = ReflectionUtil.copy(JobExecutionEntity.class, jobEntity);
         jee.setId(null);
@@ -155,7 +155,7 @@ public class JobSchedulerImpl implements JobScheduler {
         Map<String, String> confMap = new HashMap<String, String>();
 
         // global conf
-        List<JobConfEntity> confList = jobDao.getJobConfList(0l);
+        List<JobConfEntity> confList = jobDao.getJobConfList(null);
         for(JobConfEntity jce : confList) {
             confMap.put(jce.getCkey(), jce.getCvalue());
         }

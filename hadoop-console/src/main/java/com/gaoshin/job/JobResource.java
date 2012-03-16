@@ -49,21 +49,21 @@ public class JobResource extends JerseyBaseResource {
     
     @POST
     @Path("enable/{jobId}/{enable}")
-    public GenericResponse enable(@PathParam("jobId")Long jobId, @PathParam("enable")boolean enable) {
+    public GenericResponse enable(@PathParam("jobId")String jobId, @PathParam("enable")boolean enable) {
         jobService.enableJob(jobId, enable);
         return new GenericResponse();
     }
     
     @POST
     @Path("delete/{jobId}")
-    public GenericResponse delete(@PathParam("jobId") Long jobId) {
+    public GenericResponse delete(@PathParam("jobId") String jobId) {
         jobService.delete(jobId);
         return new GenericResponse();
     }
     
     @POST
     @Path("run/{jobId}")
-    public JobExecution run(@PathParam("jobId") Long jobId, JobConfList confList) {
+    public JobExecution run(@PathParam("jobId") String jobId, JobConfList confList) {
         return jobScheduler.runJob(jobId, confList);
     }
     
@@ -75,7 +75,7 @@ public class JobResource extends JerseyBaseResource {
     
     @GET
     @Path("details") 
-    public JobDetails getJobDetails(@QueryParam("id") Long jobId) {
+    public JobDetails getJobDetails(@QueryParam("id") String jobId) {
         return jobService.getJobDetails(jobId);
     }
 
@@ -87,7 +87,7 @@ public class JobResource extends JerseyBaseResource {
     
     @GET
     @Path("job-conf/details") 
-    public JobConfDetails getJobConfDetails(@QueryParam("id") Long jobConfId) {
+    public JobConfDetails getJobConfDetails(@QueryParam("id") String jobConfId) {
         return jobService.getJobConfDetails(jobConfId);
     }
     
@@ -100,14 +100,14 @@ public class JobResource extends JerseyBaseResource {
     
     @POST
     @Path("job-conf/delete/{jobConfId}") 
-    public GenericResponse deleteJobConf(@PathParam("jobConfId")Long jobConfId) {
+    public GenericResponse deleteJobConf(@PathParam("jobConfId")String jobConfId) {
         jobService.deleteJobConf(jobConfId);
         return new GenericResponse();
     }
 
     @GET
     @Path("task/type-list") 
-    public StringList listTaskType(@QueryParam("id") Long taskId) {
+    public StringList listTaskType(@QueryParam("id") String taskId) {
         return jobExecutionManager.listTaskType();
     }
 
@@ -119,7 +119,7 @@ public class JobResource extends JerseyBaseResource {
     
     @GET
     @Path("task/details") 
-    public TaskDetails getTaskDetails(@QueryParam("id") Long taskId) {
+    public TaskDetails getTaskDetails(@QueryParam("id") String taskId) {
         return jobService.getTaskDetails(taskId);
     }
     
@@ -132,7 +132,7 @@ public class JobResource extends JerseyBaseResource {
     
     @POST
     @Path("task/delete/{taskId}") 
-    public GenericResponse deleteTask(@PathParam("taskId")Long taskId) {
+    public GenericResponse deleteTask(@PathParam("taskId")String taskId) {
         jobService.deleteTask(taskId);
         return new GenericResponse();
     }
@@ -145,7 +145,7 @@ public class JobResource extends JerseyBaseResource {
     
     @GET
     @Path("job-dependency/details") 
-    public JobDependencyDetails getJobDependencyDetails(@QueryParam("id") Long jobDependencyId) {
+    public JobDependencyDetails getJobDependencyDetails(@QueryParam("id") String jobDependencyId) {
         return jobService.getJobDependencyDetails(jobDependencyId);
     }
     
@@ -158,20 +158,20 @@ public class JobResource extends JerseyBaseResource {
     
     @POST
     @Path("job-dependency/delete/{jobDependencyId}") 
-    public GenericResponse deleteJobDependency(@PathParam("jobDependencyId")Long jobDependencyId) {
+    public GenericResponse deleteJobDependency(@PathParam("jobDependencyId")String jobDependencyId) {
         jobService.deleteJobDependency(jobDependencyId);
         return new GenericResponse();
     }
     
     @GET
     @Path("job-execution/list")
-    public JobExecutionDetailsList getJobExecutionList(@QueryParam("jobId")Long jobId) {
+    public JobExecutionDetailsList getJobExecutionList(@QueryParam("jobId")String jobId) {
         return jobExecutionManager.getJobExecutionList(jobId, 0, 100);
     }
     
     @GET
     @Path("job-execution/details")
-    public JobExecutionDetails getJobExecutionDetails(@QueryParam("jobExecutionId")Long jobExecutionId) {
+    public JobExecutionDetails getJobExecutionDetails(@QueryParam("jobExecutionId")String jobExecutionId) {
         return jobExecutionManager.getJobExecutionDetails(jobExecutionId);
     }
 }

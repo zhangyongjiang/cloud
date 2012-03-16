@@ -1,15 +1,14 @@
 package com.gaoshin.job.bean;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class RuntimeJobConf {
-    private Long   id;
+    private String id;
 	private String ckey;
 	private String cvalue;
 	private boolean password = false;
-	private Long jobExecutionId;
+	private String jobExecutionId;
 
 	public RuntimeJobConf() {
 	}
@@ -19,15 +18,6 @@ public class RuntimeJobConf {
 		this.cvalue = value;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@XmlTransient
-	public Long getId() {
-		return id;
-	}
-
 	public void setPassword(boolean isPassword) {
 		this.password = isPassword;
 	}
@@ -52,11 +42,19 @@ public class RuntimeJobConf {
         this.cvalue = cvalue;
     }
 
-    public Long getJobExecutionId() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getJobExecutionId() {
         return jobExecutionId;
     }
 
-    public void setJobExecutionId(Long jobExecutionId) {
+    public void setJobExecutionId(String jobExecutionId) {
         this.jobExecutionId = jobExecutionId;
     }
 }

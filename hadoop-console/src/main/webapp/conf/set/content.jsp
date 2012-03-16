@@ -28,7 +28,7 @@
 function createConf() {
 	<c:if test="${not empty it.id}">
 		var req = {
-				id: ${it.id},
+				id: '${it.id}',
 				name: $("#name").val(),
 				value: $("#value").val()
 			};

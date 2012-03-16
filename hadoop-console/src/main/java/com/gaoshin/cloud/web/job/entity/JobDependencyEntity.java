@@ -3,31 +3,25 @@ package com.gaoshin.cloud.web.job.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class JobDependencyEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
 
-	@Column(nullable=false)
-	private Long jobId;
+	@Column(nullable=false, length=64)
+	private String jobId;
 
-	@Column(nullable=false)
-	private Long upstreamJobId;
+	@Column(nullable=false, length=64)
+	private String upstreamJobId;
 
 	@Column(nullable=false)
 	private long timeDiff;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public void setTimeDiff(long timeDiff) {
 		this.timeDiff = timeDiff;
@@ -37,20 +31,28 @@ public class JobDependencyEntity {
 		return timeDiff;
 	}
 
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long jobId) {
+    public void setJobId(String jobId) {
         this.jobId = jobId;
     }
 
-    public Long getUpstreamJobId() {
+    public String getUpstreamJobId() {
         return upstreamJobId;
     }
 
-    public void setUpstreamJobId(Long upstreamJobId) {
+    public void setUpstreamJobId(String upstreamJobId) {
         this.upstreamJobId = upstreamJobId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

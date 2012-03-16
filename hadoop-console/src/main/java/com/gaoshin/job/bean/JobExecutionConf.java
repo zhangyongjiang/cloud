@@ -4,26 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class JobExecutionConf {
-    private Long   id;
+    private String id;
 	private String ckey;
 	private String cvalue;
-	private Long jobExecutionId;
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-    public Long getJobExecutionId() {
-        return jobExecutionId;
-    }
-
-    public void setJobExecutionId(Long jobExecutionId) {
-        this.jobExecutionId = jobExecutionId;
-    }
+	private String jobExecutionId;
 
     public String getCkey() {
         return ckey;
@@ -39,5 +23,21 @@ public class JobExecutionConf {
 
     public void setCvalue(String cvalue) {
         this.cvalue = cvalue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getJobExecutionId() {
+        return jobExecutionId;
+    }
+
+    public void setJobExecutionId(String jobExecutionId) {
+        this.jobExecutionId = jobExecutionId;
     }
 }

@@ -4,9 +4,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Task {
-	private Long id;
+	private String id;
 	private String name;
-	private Long jobId;
+	private String jobId;
 	private String handler;
 	private int numOfRetries = 1;
 	private int execOrder;
@@ -81,14 +81,6 @@ public class Task {
 		return disabled;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -97,11 +89,11 @@ public class Task {
 		return name;
 	}
 
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long cronJobId) {
+    public void setJobId(String cronJobId) {
         this.jobId = cronJobId;
     }
 
@@ -111,5 +103,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

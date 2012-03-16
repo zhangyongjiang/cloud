@@ -5,34 +5,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TaskExecutionTry {
-    private Long id;
-    private Long taskExecutionId;
+    private String id;
+    private String taskExecutionId;
     private WorkStatus status = WorkStatus.Pending;
     private Long startTime;
     private Long finishTime;
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setStatus(WorkStatus status) {
         this.status = status;
     }
 
     public WorkStatus getStatus() {
         return status;
-    }
-
-    public Long getTaskExecutionId() {
-        return taskExecutionId;
-    }
-
-    public void setTaskExecutionId(Long taskExecutionId) {
-        this.taskExecutionId = taskExecutionId;
     }
 
     public Long getStartTime() {
@@ -49,6 +33,22 @@ public class TaskExecutionTry {
 
     public void setFinishTime(Long finishTime) {
         this.finishTime = finishTime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTaskExecutionId() {
+        return taskExecutionId;
+    }
+
+    public void setTaskExecutionId(String taskExecutionId) {
+        this.taskExecutionId = taskExecutionId;
     }
     
 }

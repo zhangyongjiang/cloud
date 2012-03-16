@@ -14,29 +14,29 @@ import com.gaoshin.job.bean.WorkStatus;
 
 public interface JobDao extends GenericDao {
 
-    List<JobDependencyEntity> getDownstreamJobs(Long jobId);
+    List<JobDependencyEntity> getDownstreamJobs(String jobId);
 
     List<JobExecutionEntity> getDueJobExecutions();
 
-    List<JobEntity> getUpstreams(Long jobId);
+    List<JobEntity> getUpstreams(String jobId);
 
-    List<JobDependencyEntity> getDependencies(Long jobId);
+    List<JobDependencyEntity> getDependencies(String jobId);
 
-    List<JobExecutionEntity> getJobExecution(Long upstreamJobId, long upstreamStartTime, WorkStatus succeed);
+    List<JobExecutionEntity> getJobExecution(String upstreamJobId, long upstreamStartTime, WorkStatus succeed);
 
-    List<TaskEntity> getOrderedJobTasks(Long jobId);
+    List<TaskEntity> getOrderedJobTasks(String jobId);
 
-    List<JobConfEntity> getJobConfList(Long jobId);
+    List<JobConfEntity> getJobConfList(String jobId);
 
-    List<JobExecutionEntity> getJobExecutionList(Long jobId, int offset, int size);
+    List<JobExecutionEntity> getJobExecutionList(String jobId, int offset, int size);
 
-    List<TaskExecutionEntity> getJobExecutionChildren(Long jobExecutionId);
+    List<TaskExecutionEntity> getJobExecutionChildren(String jobExecutionId);
 
     List<JobEntity> getEnabledCronJobs();
 
-    JobExecutionEntity getLastCronScheduledJobExecution(Long jobId);
+    JobExecutionEntity getLastCronScheduledJobExecution(String jobId);
 
-    RuntimeJobConfEntity getJobExecutionConf(Long jobExecutionId, String key);
+    RuntimeJobConfEntity getJobExecutionConf(String jobExecutionId, String key);
 
-    List<RuntimeJobConfEntity> getJobExecutionConfList(Long jobExecutionId);
+    List<RuntimeJobConfEntity> getJobExecutionConfList(String jobExecutionId);
 }

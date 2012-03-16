@@ -8,17 +8,17 @@ public interface JobExecutionManager {
 
     StringList listTaskType();
 
-    void taskExecutionSucceed(Long currentTaskExecutionEntityId);
+    void taskExecutionSucceed(String currentTaskExecutionEntityId);
 
-    void taskExecutionFailed(Long id);
+    void taskExecutionFailed(String id);
 
-    void jobFailed(Long jobExecutionId);
+    void jobFailed(String jobExecutionId);
 
-    void jobSucceed(Long jobExecutionId);
+    void jobSucceed(String jobExecutionId);
 
     void checkDueJob();
 
-    JobExecutionDetailsList getJobExecutionList(Long jobId, int offset, int size);
+    JobExecutionDetailsList getJobExecutionList(String jobId, int offset, int size);
 
-    JobExecutionDetails getJobExecutionDetails(Long jobExecutionId);
+    JobExecutionDetails getJobExecutionDetails(String jobExecutionId);
 }

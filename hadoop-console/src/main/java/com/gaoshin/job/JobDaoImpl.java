@@ -23,7 +23,7 @@ import com.gaoshin.job.bean.WorkStatus;
 public class JobDaoImpl extends HibernateBaseDao implements JobDao {
 
     @Override
-    public List<JobDependencyEntity> getDownstreamJobs(Long jobId) {
+    public List<JobDependencyEntity> getDownstreamJobs(String jobId) {
         return find("from JobDependencyEntity jde where jde.upstreamJobId=?", jobId);
     }
 
@@ -35,7 +35,7 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     }
 
     @Override
-    public List<JobEntity> getUpstreams(final Long jobId) {
+    public List<JobEntity> getUpstreams(final String jobId) {
         return hibernateTemplate.execute(new HibernateCallback<List<JobEntity>>() {
             @Override
             public List<JobEntity> doInHibernate(Session session) throws HibernateException, SQLException {
@@ -49,12 +49,12 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     }
 
     @Override
-    public List<JobDependencyEntity> getDependencies(Long jobId) {
+    public List<JobDependencyEntity> getDependencies(String jobId) {
         return find(JobDependencyEntity.class, "from JobDependencyEntity jde where jde.jobId=?", jobId);
     }
 
     @Override
-    public List<JobExecutionEntity> getJobExecution(Long upstreamJobId, long upstreamStartTime, WorkStatus status) {
+    public List<JobExecutionEntity> getJobExecution(String upstreamJobId, long upstreamStartTime, WorkStatus status) {
         if(status == null) {
             return find("from JobExecutionEntity je where je.jobId=? and je.scheduledStartTime=?", upstreamJobId, upstreamStartTime);
         }
@@ -64,22 +64,22 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     }
 
     @Override
-    public List<TaskEntity> getOrderedJobTasks(Long jobId) {
+    public List<TaskEntity> getOrderedJobTasks(String jobId) {
         return find("from TaskEntity te where te.jobId = ? order by te,execOrder", jobId);
     }
 
     @Override
-    public List<JobConfEntity> getJobConfList(Long jobId) {
+    public List<JobConfEntity> getJobConfList(String jobId) {
         return find("from JobConfEntity jce where jce.jobId=?", jobId);
     }
 
     @Override
-    public List<JobExecutionEntity> getJobExecutionList(Long jobId, int offset, int size) {
+    public List<JobExecutionEntity> getJobExecutionList(String jobId, int offset, int size) {
         return find(JobExecutionEntity.class, offset, size, "from JobExecutionEntity jee where jee.jobId=? order by jee.scheduledStartTime desc", jobId);
     }
 
     @Override
-    public List<TaskExecutionEntity> getJobExecutionChildren(Long jobExecutionId) {
+    public List<TaskExecutionEntity> getJobExecutionChildren(String jobExecutionId) {
         return find("from TaskExecutionEntity tee where tee.jobExecutionId=? order by tee.startTime", jobExecutionId);
     }
 
@@ -89,19 +89,19 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     }
 
     @Override
-    public JobExecutionEntity getLastCronScheduledJobExecution(Long jobId) {
+    public JobExecutionEntity getLastCronScheduledJobExecution(String jobId) {
         List<JobExecutionEntity> list = find(JobExecutionEntity.class, "from JobExecutionEntity jee where jee.scheduledStartTime > 0 and jee.jobId = ? order by jee.scheduledStartTime desc limit 1", jobId);
         return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
-    public RuntimeJobConfEntity getJobExecutionConf(Long jobExecutionId, String key) {
+    public RuntimeJobConfEntity getJobExecutionConf(String jobExecutionId, String key) {
         List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? and jece.ckey=?", jobExecutionId, key);
         return list.isEmpty() ? null : list.get(0);
     }
 
     @Override
-    public List<RuntimeJobConfEntity> getJobExecutionConfList(Long jobExecutionId) {
+    public List<RuntimeJobConfEntity> getJobExecutionConfList(String jobExecutionId) {
         List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? ", jobExecutionId);
         return list;
     }

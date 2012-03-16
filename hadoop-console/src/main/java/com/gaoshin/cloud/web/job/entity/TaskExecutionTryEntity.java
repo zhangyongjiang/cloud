@@ -5,24 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-import com.gaoshin.job.bean.WorkStatus;
+import org.hibernate.annotations.GenericGenerator;
 
+import com.gaoshin.job.bean.WorkStatus;
 import common.util.Misc;
 
 @Entity
 @Table
 public class TaskExecutionTryEntity {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    @Id @GeneratedValue(generator="idGenerator")
+    @GenericGenerator(name="idGenerator", strategy="common.db.IdGenerator")
+    @Column(length=64)
+    private String id;
     
-    @Column
-    private Long taskExecutionId;
+    @Column(length=64)
+    private String taskExecutionId;
 
     @Column(length = 64)
     @Enumerated(EnumType.STRING)
@@ -49,28 +50,12 @@ public class TaskExecutionTryEntity {
     @Lob
     private String processInfo;
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setStatus(WorkStatus status) {
         this.status = status;
     }
 
     public WorkStatus getStatus() {
         return status;
-    }
-
-    public Long getTaskExecutionId() {
-        return taskExecutionId;
-    }
-
-    public void setTaskExecutionId(Long taskExecutionId) {
-        this.taskExecutionId = taskExecutionId;
     }
 
     public Long getStartTime() {
@@ -147,5 +132,21 @@ public class TaskExecutionTryEntity {
 
     public void setProcessInfo(String processInfo) {
         this.processInfo = processInfo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTaskExecutionId() {
+        return taskExecutionId;
+    }
+
+    public void setTaskExecutionId(String taskExecutionId) {
+        this.taskExecutionId = taskExecutionId;
     }
 }

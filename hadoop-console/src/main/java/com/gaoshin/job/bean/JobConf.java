@@ -4,11 +4,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class JobConf {
-    private Long   id;
+    private String id;
 	private String ckey;
 	private String cvalue;
 	private boolean password = false;
-	private Long jobId;
+	private String jobId;
 
 	public JobConf() {
 	}
@@ -18,14 +18,6 @@ public class JobConf {
 		this.cvalue = value;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
 	public void setPassword(boolean isPassword) {
 		this.password = isPassword;
 	}
@@ -34,11 +26,11 @@ public class JobConf {
 		return password;
 	}
 
-    public Long getJobId() {
+    public String getJobId() {
         return jobId;
     }
 
-    public void setJobId(Long cronJobId) {
+    public void setJobId(String cronJobId) {
         this.jobId = cronJobId;
     }
 
@@ -56,5 +48,13 @@ public class JobConf {
 
     public void setCvalue(String cvalue) {
         this.cvalue = cvalue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

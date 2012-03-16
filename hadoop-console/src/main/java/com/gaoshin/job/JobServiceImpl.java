@@ -28,7 +28,6 @@ import com.gaoshin.job.bean.JobDetails;
 import com.gaoshin.job.bean.JobList;
 import com.gaoshin.job.bean.Task;
 import com.gaoshin.job.bean.TaskDetails;
-
 import common.util.reflection.ReflectionUtil;
 
 @Service("jobService")
@@ -71,7 +70,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void delete(Long jobId) {
+    public void delete(String jobId) {
         JobEntity jobEntity = jobDao.getEntity(JobEntity.class, jobId);
         if(jobEntity == null) {
             throw new BusinessException(ServiceError.NotFound);
@@ -84,7 +83,7 @@ public class JobServiceImpl implements JobService {
         jobDao.deleteEntity(jobEntity);
     }
     
-    private Job getJob(Long jobId) {
+    private Job getJob(String jobId) {
         JobEntity jobEntity = jobDao.getEntity(JobEntity.class, jobId);
         if(jobEntity == null) {
             return null;
@@ -93,7 +92,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDetails getJobDetails(Long jobId) {
+    public JobDetails getJobDetails(String jobId) {
         JobEntity entity = jobDao.getEntity(JobEntity.class, jobId);
         JobDetails bean = ReflectionUtil.copy(JobDetails.class, entity);
 
@@ -119,7 +118,7 @@ public class JobServiceImpl implements JobService {
             jobIdList.add(dep.getUpstreamJobId());
         }
         List<JobEntity> blockedByJobList = jobDao.in(JobEntity.class, "from JobEntity je where je.id in (:values)", jobIdList);
-        Map<Long, JobEntity> map = new HashMap<Long, JobEntity>();
+        Map<String, JobEntity> map = new HashMap<String, JobEntity>();
         for(JobEntity je : blockedByJobList) {
             map.put(je.getId(), je);
         }
@@ -143,7 +142,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobConfDetails getJobConfDetails(Long jobConfId) {
+    public JobConfDetails getJobConfDetails(String jobConfId) {
         JobConfEntity entity = jobDao.getEntity(JobConfEntity.class, jobConfId);
         JobConfDetails details = ReflectionUtil.copy(JobConfDetails.class, entity);
         details.setJob(getJob(entity.getJobId()));
@@ -157,7 +156,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteJobConf(Long jobConfId) {
+    public void deleteJobConf(String jobConfId) {
         JobConfEntity entity = jobDao.getEntity(JobConfEntity.class, jobConfId);
         jobDao.deleteEntity(entity);
     }
@@ -171,7 +170,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public TaskDetails getTaskDetails(Long taskId) {
+    public TaskDetails getTaskDetails(String taskId) {
         TaskEntity entity = jobDao.getEntity(TaskEntity.class, taskId);
         TaskDetails details = ReflectionUtil.copy(TaskDetails.class, entity);
         details.setJob(getJob(entity.getJobId()));
@@ -185,7 +184,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteTask(Long taskId) {
+    public void deleteTask(String taskId) {
         TaskEntity entity = jobDao.getEntity(TaskEntity.class, taskId);
         jobDao.deleteEntity(entity);
     }
@@ -199,7 +198,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDependencyDetails getJobDependencyDetails(Long jobDependencyId) {
+    public JobDependencyDetails getJobDependencyDetails(String jobDependencyId) {
         JobDependencyEntity entity = jobDao.getEntity(JobDependencyEntity.class, jobDependencyId);
         JobDependencyDetails details = ReflectionUtil.copy(JobDependencyDetails.class, entity);
         details.setJob(getJob(entity.getJobId()));
@@ -214,13 +213,13 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteJobDependency(Long jobDependencyId) {
+    public void deleteJobDependency(String jobDependencyId) {
         JobDependencyEntity entity = jobDao.getEntity(JobDependencyEntity.class, jobDependencyId);
         jobDao.deleteEntity(entity);
     }
 
     @Override
-    public void enableJob(Long jobId, boolean enable) {
+    public void enableJob(String jobId, boolean enable) {
         JobEntity entity = jobDao.getEntity(JobEntity.class, jobId);
         entity.setEnabled(enable);
         jobDao.saveEntity(entity);

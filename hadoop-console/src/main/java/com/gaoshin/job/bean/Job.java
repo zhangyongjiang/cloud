@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Job {
-	private Long id;
+	private String id;
 	private String name;
 	private String cronExpression;
 	private String host;
@@ -13,14 +13,6 @@ public class Job {
 	private long expectedDuration;
 	private String notificationEmail;
 	private String description;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getCronExpression() {
 		return cronExpression;
@@ -85,4 +77,12 @@ public class Job {
 	public String getDescription() {
 		return description;
 	}
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
