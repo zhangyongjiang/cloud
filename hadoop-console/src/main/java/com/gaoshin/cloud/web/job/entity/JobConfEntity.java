@@ -25,8 +25,8 @@ public class JobConfEntity {
 	@Column
 	private boolean password = false;
 	
-	@Column(nullable = false, length=64)
-	private String jobId;
+    @Column(length=64)
+    private String jobId;
 
 	public JobConfEntity() {
 	}
