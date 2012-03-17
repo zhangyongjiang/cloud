@@ -1,8 +1,5 @@
 package com.gaoshin.job.plugin.hadoop;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,20 +7,12 @@ import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
 import com.gaoshin.cloud.web.job.entity.TaskEntity;
 import com.gaoshin.cloud.web.job.entity.TaskExecutionEntity;
 import com.gaoshin.job.bean.GaoshinProcess;
-import com.gaoshin.job.bean.TaskProcessor;
 import com.gaoshin.job.plugin.BaseTaskProcessor;
 import common.util.reflection.ReflectionUtil;
 
 @Service("hadoopTaskProcessor")
 @Transactional
-public class HadoopTaskProcessor extends BaseTaskProcessor implements TaskProcessor, ApplicationContextAware {
-    private ApplicationContext springContext;
-
-    @Override
-    public void setApplicationContext(ApplicationContext springContext) throws BeansException {
-        this.springContext = springContext;
-    }
-    
+public class HadoopTaskProcessor extends BaseTaskProcessor {
     @Override
     public String getName() {
         return "Hadoop Task";

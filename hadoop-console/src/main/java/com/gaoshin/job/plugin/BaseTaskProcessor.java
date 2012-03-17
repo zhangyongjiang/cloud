@@ -3,7 +3,10 @@ package com.gaoshin.job.plugin;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import com.gaoshin.cloud.web.job.entity.JobExecutionEntity;
 import com.gaoshin.cloud.web.job.entity.TaskEntity;
@@ -13,12 +16,19 @@ import com.gaoshin.job.bean.GaoshinProcess;
 import com.gaoshin.job.bean.TaskProcessor;
 import com.gaoshin.job.bean.WorkStatus;
 
-public abstract class BaseTaskProcessor implements TaskProcessor{
+public abstract class BaseTaskProcessor implements TaskProcessor, ApplicationContextAware {
     abstract protected GaoshinProcess getProcess(JobExecutionEntity jee, TaskEntity te, TaskExecutionEntity tee);
     
     @Autowired private JobDao jobDao;
+    protected ApplicationContext springContext;
     
     protected List<GaoshinProcess> processList = new ArrayList<GaoshinProcess>();
+
+    @Override
+    public void setApplicationContext(ApplicationContext springContext) throws BeansException {
+        this.springContext = springContext;
+    }
+    
     
     @Override
     public void run(JobExecutionEntity jee, TaskEntity toBeExecuted) {

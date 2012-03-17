@@ -35,7 +35,6 @@ public abstract class BaseProcess implements GaoshinProcess{
     protected JobExecutionEntity jobExecutionEntity;
     protected TaskEntity taskEntity;
     protected TaskExecutionEntity taskExecutionEntity;
-    protected List<JobConfEntity> jobConfList;
     
     protected JobDao jobDao;
     protected TaskExecutionTryEntity currentTry;
@@ -47,7 +46,32 @@ public abstract class BaseProcess implements GaoshinProcess{
         this.jobExecutionEntity = jee;
         this.taskEntity = te;
         this.taskExecutionEntity = tee;
-        this.jobConfList = jobDao.getConfListByOwnerId(jee.getJobId());
+    }
+    
+    public Map<String, String> getConfigurations() {
+        Map<String, String> configuration = new HashMap<String, String>();
+        
+        List<JobConfEntity> globalConfs = jobDao.getConfListByOwnerId(null);
+        for(JobConfEntity conf : globalConfs) {
+           configuration.put(conf.getName(), conf.getValue()); 
+        }
+        
+        List<JobConfEntity> jobConfList = jobDao.getConfListByOwnerId(jobExecutionEntity.getJobId());
+        for(JobConfEntity conf : jobConfList) {
+            configuration.put(conf.getName(), conf.getValue()); 
+        }
+        
+        List<JobConfEntity> taskConfList = jobDao.getConfListByOwnerId(taskEntity.getId());
+        for(JobConfEntity conf : taskConfList) {
+            configuration.put(conf.getName(), conf.getValue()); 
+        }
+        
+        List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
+        for(RuntimeJobConfEntity jece : confList) {
+            configuration.put(jece.getName(), jece.getValue());
+        }
+
+        return Parameter.replace(configuration);
     }
 
     protected void error(Exception e) {
@@ -216,17 +240,7 @@ public abstract class BaseProcess implements GaoshinProcess{
     }
     
     private void replaceParams(String... params) {
-        Map<String, String> map = new HashMap<String, String>();
-        
-        List<JobConfEntity> taskConfs = jobDao.getConfListByOwnerId(taskEntity.getId());
-        for(JobConfEntity conf : taskConfs) {
-            map.put(conf.getName(), conf.getValue());
-        }
-        
-        List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
-        for(RuntimeJobConfEntity jece : confList) {
-            map.put(jece.getName(), jece.getValue());
-        }
+        Map<String, String> map = getConfigurations();
         
         String tmpKey = UUID.randomUUID().toString();
         for(int i=0; i<params.length; i++) {
@@ -414,29 +428,4 @@ public abstract class BaseProcess implements GaoshinProcess{
         return ret;
     }
     
-    public JobConfEntity getConf(String key) {
-        for(JobConfEntity entity : jobConfList) { 
-            if(entity.getName().equals(key)) {
-                return entity;
-            }
-        }
-        return null;
-    }
-    
-    public String getConfString(String key) {
-        for(JobConfEntity entity : jobConfList) { 
-            if(entity.getName().equals(key)) {
-                return entity.getValue();
-            }
-        }
-        return null;
-    }
-    
-    public int getConfInt(String key, int defaultValue) {
-        String value = getConfString(key);
-        if(value == null || value.trim().length() == 0) {
-            return defaultValue;
-        }
-        return Integer.parseInt(value);
-    }
 }
