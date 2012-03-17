@@ -18,7 +18,7 @@
 		<o:text-input-tr label="Exec Order" id="execOrder"  value="${it.execOrder}"></o:text-input-tr>
 		<o:text-input-tr label="Disabled?" id="disabled"  value="${it.disabled}"></o:text-input-tr>
 		<o:text-input-tr label="Expected Duration " id="expectedDuration" value="${it.expectedDuration}"></o:text-input-tr>
-		<o:text-input-tr label="Handler" id="handler" value="${it.handler}"></o:text-input-tr>
+		<o:tr label="Task Type" ><g:task-types select="${it.handler}"/></o:tr>
 		<o:text-input-tr label="Num Of Retries" id="numOfRetries" value="${it.numOfRetries}"></o:text-input-tr>
 		<o:text-input-tr label="Retry Interval " id="retryInterval" value="${it.retryInterval}"></o:text-input-tr>
 		<o:textarea-tr   id="description" label="Description">${it.description }</o:textarea-tr>

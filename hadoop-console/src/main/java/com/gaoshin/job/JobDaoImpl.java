@@ -69,8 +69,8 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     }
 
     @Override
-    public List<JobConfEntity> getJobConfList(String jobId) {
-        return find("from JobConfEntity jce where jce.jobId=?", jobId);
+    public List<JobConfEntity> getConfListByOwnerId(String ownerId) {
+        return find("from JobConfEntity jce where jce.ownerId=?", ownerId);
     }
 
     @Override
@@ -105,5 +105,4 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
         List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? ", jobExecutionId);
         return list;
     }
-
 }

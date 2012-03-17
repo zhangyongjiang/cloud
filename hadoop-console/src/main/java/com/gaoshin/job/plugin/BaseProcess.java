@@ -47,7 +47,7 @@ public abstract class BaseProcess implements GaoshinProcess{
         this.jobExecutionEntity = jee;
         this.taskEntity = te;
         this.taskExecutionEntity = tee;
-        this.jobConfList = jobDao.getJobConfList(jee.getJobId());
+        this.jobConfList = jobDao.getConfListByOwnerId(jee.getJobId());
     }
 
     protected void error(Exception e) {
@@ -216,8 +216,14 @@ public abstract class BaseProcess implements GaoshinProcess{
     }
     
     private void replaceParams(String... params) {
-        List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
         Map<String, String> map = new HashMap<String, String>();
+        
+        List<JobConfEntity> taskConfs = jobDao.getConfListByOwnerId(taskEntity.getId());
+        for(JobConfEntity conf : taskConfs) {
+            map.put(conf.getName(), conf.getValue());
+        }
+        
+        List<RuntimeJobConfEntity> confList = jobDao.getJobExecutionConfList(jobExecutionEntity.getId());
         for(RuntimeJobConfEntity jece : confList) {
             map.put(jece.getName(), jece.getValue());
         }

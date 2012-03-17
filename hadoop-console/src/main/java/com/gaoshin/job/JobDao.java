@@ -26,7 +26,7 @@ public interface JobDao extends GenericDao {
 
     List<TaskEntity> getOrderedJobTasks(String jobId);
 
-    List<JobConfEntity> getJobConfList(String jobId);
+    List<JobConfEntity> getConfListByOwnerId(String ownerId);
 
     List<JobExecutionEntity> getJobExecutionList(String jobId, int offset, int size);
 

@@ -155,12 +155,12 @@ public class JobSchedulerImpl implements JobScheduler {
         Map<String, String> confMap = new HashMap<String, String>();
 
         // global conf
-        List<JobConfEntity> confList = jobDao.getJobConfList(null);
+        List<JobConfEntity> confList = jobDao.getConfListByOwnerId(null);
         for(JobConfEntity jce : confList) {
             confMap.put(jce.getName(), jce.getValue());
         }
         
-        confList = jobDao.getJobConfList(jobEntity.getId());
+        confList = jobDao.getConfListByOwnerId(jobEntity.getId());
         for(JobConfEntity jce : confList) {
             confMap.put(jce.getName(), jce.getValue());
         }
