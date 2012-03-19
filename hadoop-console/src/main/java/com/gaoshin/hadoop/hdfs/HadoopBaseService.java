@@ -17,7 +17,7 @@ public class HadoopBaseService {
     
     public String getHdfsUrl() {
         if(hdfsUrl == null) {
-            JobConf conf = confService.get("hadoop.dfs.uri");
+            JobConf conf = confService.getByKey("hadoop.dfs.uri");
             if(conf != null) {
                 hdfsUrl = conf.getValue();
             }
