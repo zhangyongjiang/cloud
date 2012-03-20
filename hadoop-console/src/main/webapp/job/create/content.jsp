@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 
-<div class="page-header">Create a Work Flow 创建工作流程</div>
+<div class="page-header">Create a Work Flow</div>
 
 <form method="post" action='<c:url value="/jobcreate"/>' onSubmit="return createJob()">
 <table style="border-left: solid 1px #fff;">
