@@ -31,6 +31,7 @@
 	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Expected Start Time" ><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${it.scheduledStartTime}"/></o:tr-label-value>
 	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Expected Duration" ><o:millisecond-to-time-len time="${it.expectedDuration}"/></o:tr-label-value>
 	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Actual Start Time" ><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${it.startTime}"/></o:tr-label-value>
+	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Delay" >${it.delay}</o:tr-label-value>
 	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Actual Duration" ><o:millisecond-to-time-len time="${it.duration}"/></o:tr-label-value>
 	<o:tr-label-value tdstyle="text-align:left;border:solid 1px #ccc;padding:6px;" label="Error Notification Email" >${it.notificationEmail}</o:tr-label-value>
 

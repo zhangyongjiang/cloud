@@ -13,6 +13,7 @@ public class Job {
 	private long expectedDuration;
 	private String notificationEmail;
 	private String description;
+	private long delay;
 
 	public String getCronExpression() {
 		return cronExpression;
@@ -84,5 +85,13 @@ public class Job {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
     }
 }

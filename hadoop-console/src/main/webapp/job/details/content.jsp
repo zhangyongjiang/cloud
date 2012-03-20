@@ -36,6 +36,7 @@
 	<o:tr-label-value label="Description" >${it.description}</o:tr-label-value>
 	
 	<o:tr-label-value label="Cron Expression" >${it.cronExpression}</o:tr-label-value>
+	<o:tr-label-value label="Delay" >${it.delay}</o:tr-label-value>
 	<o:tr-label-value label="Retention Days" >${it.retention}</o:tr-label-value>
 	<o:tr-label-value label="Expected Duration " >${it.expectedDuration}</o:tr-label-value>
 	<o:tr-label-value label="Error Notification Email" >${it.notificationEmail}</o:tr-label-value>

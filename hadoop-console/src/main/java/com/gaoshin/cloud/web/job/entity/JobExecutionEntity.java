@@ -50,6 +50,9 @@ public class JobExecutionEntity {
     @Lob
 	private String note;
 
+    @Column(nullable=false)
+    private long delay;
+    
     public WorkStatus getStatus() {
         return status;
     }
@@ -140,4 +143,11 @@ public class JobExecutionEntity {
         this.jobId = jobId;
     }
 
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
+    }
 }

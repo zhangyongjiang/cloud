@@ -11,6 +11,7 @@
 	<o:text-input-tr id="enabled" label="Enabled" value="false"></o:text-input-tr>
 	<o:text-input-tr id="expectedDuration" label="Expected Duration "></o:text-input-tr>
 	<o:text-input-tr id="notificationEmail" label="Error Notication Email"></o:text-input-tr>
+	<o:text-input-tr id="delay" label="Delay"></o:text-input-tr>
 	<o:textarea-tr   id="description" label="Description"></o:textarea-tr>
 	<o:submit-tr value="Create" cancel="window.history.back()"></o:submit-tr>
 </table>
@@ -27,6 +28,7 @@ function createJob() {
 		enabled: $("#enabled").val(),
 		expectedDuration: $("#expectedDuration").val(),
 		notificationEmail: $("#notificationEmail").val(),
+		delay: $("#delay").val(),
 		description: $("#description").val()
 	};
 	

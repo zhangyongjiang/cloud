@@ -16,7 +16,8 @@
 	<o:text-input-tr id="retention" label="Retention in Days" value="${job.retention }"></o:text-input-tr>
 	<o:text-input-tr id="enabled" label="Enabled" value="${job.enabled }"></o:text-input-tr>
 	<o:text-input-tr id="expectedDuration" label="Expected Duration " value="${job.expectedDuration }"></o:text-input-tr>
-	<o:text-input-tr id="notificationEmail" label="Error Notication Email" value="${notificationEmail }"></o:text-input-tr>
+	<o:text-input-tr id="notificationEmail" label="Error Notication Email" value="${job.notificationEmail }"></o:text-input-tr>
+	<o:text-input-tr id="delay" label="Delay" value="${job.delay}"></o:text-input-tr>
 	<o:textarea-tr   id="description" label="Description">${job.description }</o:textarea-tr>
 	<o:submit-tr value="Update" cancel="window.history.back()"></o:submit-tr>
 </table>
@@ -34,6 +35,7 @@ function editJob() {
 		enabled: $("#enabled").val(),
 		expectedDuration: $("#expectedDuration").val(),
 		notificationEmail: $("#notificationEmail").val(),
+		delay: $("#delay").val(),
 		description: $("#description").val()
 	};
     var json = JSON.stringify(req);

@@ -33,8 +33,11 @@ public class JobEntity {
 	@Column
 	private int retention = 30;  // keep job for 30 days by default
 
-	@Column
-	private long expectedDuration;
+    @Column
+    private long expectedDuration;
+
+    @Column(nullable=false)
+    private long delay;
 
 	@Column
 	private String notificationEmail;
@@ -112,5 +115,13 @@ public class JobEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
     }
 }

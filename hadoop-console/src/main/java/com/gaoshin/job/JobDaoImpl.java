@@ -29,7 +29,7 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
 
     @Override
     public List<JobExecutionEntity> getDueJobExecutions() {
-        return find("from JobExecutionEntity jee where jee.scheduledStartTime<? and jee.status=?", 
+        return find("from JobExecutionEntity jee where (jee.scheduledStartTime+jee.delay)<? and jee.status=?", 
                 System.currentTimeMillis(), 
                 WorkStatus.Pending);
     }

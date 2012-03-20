@@ -14,6 +14,7 @@ public class JobExecution {
 	private boolean changed;
 	private String notificationEmail;
     private String note;
+    private long delay;
 
     public String getJobId() {
         return jobId;
@@ -95,4 +96,11 @@ public class JobExecution {
         this.id = id;
     }
 
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
+    }
 }
