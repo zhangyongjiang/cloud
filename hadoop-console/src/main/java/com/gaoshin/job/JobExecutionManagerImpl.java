@@ -166,6 +166,12 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
         if(tasks.isEmpty()) {
             return null;
         }
+        Collections.sort(tasks, new Comparator<TaskEntity>() {
+            @Override
+            public int compare(TaskEntity o1, TaskEntity o2) {
+                return o1.getExecOrder() - o2.getExecOrder();
+            }
+        });
         
         if(nextTaskExecOrder != null) {
             for(TaskEntity te : tasks) {

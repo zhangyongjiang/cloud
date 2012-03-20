@@ -65,7 +65,7 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
 
     @Override
     public List<TaskEntity> getOrderedJobTasks(String jobId) {
-        return find("from TaskEntity te where te.jobId = ? order by te,execOrder desc", jobId);
+        return find("from TaskEntity te where te.jobId = ? order by te,execOrder asc", jobId);
     }
 
     @Override
