@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public interface GaoshinProcess {
-    int getExitCode() throws Exception;
+    Integer getExitCode(boolean wait) throws Exception;
     InputStream getInputStream();
     InputStream getErrorStream() throws IOException;
     OutputStream getOutputStream();

@@ -58,7 +58,7 @@ public class RemoteProcess extends BaseProcess {
     }
 
     @Override
-    public int getExitCode() throws Exception {
+    public Integer getExitCode(boolean wait) throws Exception {
         return sshShell.getExitCode();
     }
 

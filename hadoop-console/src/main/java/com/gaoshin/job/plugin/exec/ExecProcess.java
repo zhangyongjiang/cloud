@@ -24,8 +24,16 @@ public class ExecProcess extends BaseProcess {
     }
 
     @Override
-    public int getExitCode() throws Exception {
-        return process.exitValue();
+    public Integer getExitCode(boolean wait) throws Exception {
+        if(wait) {
+            process.waitFor();
+        }
+        try {
+            return process.exitValue();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

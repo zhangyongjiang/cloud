@@ -230,7 +230,7 @@ public abstract class BaseProcess implements GaoshinProcess{
         catchStderr();
         jobDao.merge(currentTry);
         
-        int exitCode = getExitCode();
+        int exitCode = getExitCode(true);
         if(exitCode != 0) {
             error(exitCode);
         }
