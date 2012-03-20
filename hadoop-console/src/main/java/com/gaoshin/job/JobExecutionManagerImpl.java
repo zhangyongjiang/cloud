@@ -1,5 +1,7 @@
 package com.gaoshin.job;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +65,12 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
 
     private void runJobExecution(JobExecutionEntity jee) {
         List<TaskEntity> tasks = jobDao.getOrderedJobTasks(jee.getJobId());
+        Collections.sort(tasks, new Comparator<TaskEntity>() {
+            @Override
+            public int compare(TaskEntity o1, TaskEntity o2) {
+                return o1.getExecOrder() - o2.getExecOrder();
+            }
+        });
         if(tasks.size() == 0) {
             jee.setStatus(WorkStatus.Succeed);
             jee.setStartTime(System.currentTimeMillis());
