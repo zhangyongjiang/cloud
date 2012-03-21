@@ -14,7 +14,7 @@
 
 <c:if test="${not empty it.items }">
 	<table style="border:solid 1px;">
-		<tr><th>Execution ID</th><th>Status</th><th>Scheduled Start Time</th><th>Start Time</th><th>Expected Duration</th><th>Actual Duration</th></tr>
+		<tr><th>Execution ID</th><th>Job</th><th>Status</th><th>Scheduled Start Time</th><th>Start Time</th><th>Expected Duration</th><th>Actual Duration</th></tr>
 		<c:forEach var="jobexec" items="${it.items }">
 		
 			<c:set var="color">#ddd</c:set>
