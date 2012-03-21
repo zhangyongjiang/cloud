@@ -38,6 +38,8 @@ public abstract class BaseProcess implements GaoshinProcess{
     
     protected JobDao jobDao;
     protected TaskExecutionTryEntity currentTry;
+    
+    private boolean finished = false;
 
     public BaseProcess(ApplicationContext springContext, JobExecutionEntity jee, TaskEntity te, TaskExecutionEntity tee) {
         this.springContext = springContext;
@@ -149,6 +151,7 @@ public abstract class BaseProcess implements GaoshinProcess{
                 catch (Exception e) {
                     error(e);
                 }
+                finished = true;
             }
         });
         
@@ -156,9 +159,9 @@ public abstract class BaseProcess implements GaoshinProcess{
             @Override
             public void run() {
                 long startTime = System.currentTimeMillis();
-                while(true) {
+                while(!finished) {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(10000);
                         long now = System.currentTimeMillis();
                         long diff = now - startTime;
                         if(diff > 3600000) {
