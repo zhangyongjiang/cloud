@@ -14,7 +14,7 @@
 
 <c:if test="${not empty it.items }">
 	<table style="border:solid 1px;">
-		<tr><th>Execution ID</th><th>Job</th><th>Status</th><th>Scheduled Start Time</th><th>Start Time</th><th>Expected Duration</th><th>Actual Duration</th></tr>
+		<tr><th>Scheduled Start Time</th><th>Job</th><th>Status</th><th>Start Time</th><th>Expected Duration</th><th>Actual Duration</th></tr>
 		<c:forEach var="jobexec" items="${it.items }">
 		
 			<c:set var="color">#ddd</c:set>
@@ -24,10 +24,9 @@
 			<c:if test="${jobexec.expectedDuration > 0 && jobexec.expectedDuration < jobexec.duration}"><c:set var="slaColor">red</c:set></c:if>
 			
 			<tr>
-				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><a href="<c:url value="/job/job-execution/details/index.jsp.oo?jobExecutionId=${jobexec.id}"/>">${jobexec.id}</a></td>
+				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><a href="<c:url value="/job/job-execution/details/index.jsp.oo?jobExecutionId=${jobexec.id}"/>"><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${jobexec.scheduledStartTime}"/>&nbsp;</a></td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><a style="text-decoration:none;" href="<c:url value="/job/details/index.jsp.oo?id=${jobexec.jobId}"/>">${jobexec.job.name}</a></td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><img border="0" src="<c:url value="/images/status-${jobexec.status}.gif"/>"/> ${jobexec.status}</td>
-				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${jobexec.scheduledStartTime}"/>&nbsp;</td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-date format="yyyy-MM-dd HH:mm:ss" time="${jobexec.startTime}"/>&nbsp;</td>
 				<td style="text-align:left;border:solid 1px #ddd;padding:6px;"><o:millisecond-to-time-len time="${jobexec.expectedDuration}"/></td>
 				<td style="text-align:left;border:solid 1px ${slaColor};padding:6px;"><o:millisecond-to-time-len time="${jobexec.duration}"/>&nbsp;</td>
