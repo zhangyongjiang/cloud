@@ -58,5 +58,6 @@ public class ExecProcess extends BaseProcess {
 
     @Override
     public void cleanup() {
+        process.destroy();
     }
 }
