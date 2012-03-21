@@ -39,4 +39,6 @@ public interface JobDao extends GenericDao {
     RuntimeJobConfEntity getJobExecutionConf(String jobExecutionId, String key);
 
     List<RuntimeJobConfEntity> getJobExecutionConfList(String jobExecutionId);
+
+    List<JobExecutionEntity> getJobExecutionList(int offset, int size);
 }

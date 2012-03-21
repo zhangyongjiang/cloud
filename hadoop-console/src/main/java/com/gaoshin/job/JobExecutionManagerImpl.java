@@ -2,6 +2,7 @@ package com.gaoshin.job;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -256,5 +257,24 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
         }
         
         return details;
+    }
+
+    @Override
+    public JobExecutionDetailsList getJobExecutionList(int offset, int size) {
+        JobExecutionDetailsList list = new JobExecutionDetailsList();
+        List<JobExecutionEntity> entities = jobDao.getJobExecutionList(offset, size);
+        Map<String, Job> jobs = new HashMap<String, Job>();
+        for(JobExecutionEntity jee : entities) {
+            JobExecutionDetails jed = ReflectionUtil.copy(JobExecutionDetails.class, jee);
+            Job job = jobs.get(jee.getJobId());
+            if(job == null) {
+                JobEntity jobEntity = jobDao.getEntity(JobEntity.class, jee.getJobId());
+                job = ReflectionUtil.copy(Job.class, jobEntity);
+                jobs.put(jee.getJobId(), job);
+            }
+            jed.setJob(job);
+            list.getItems().add(jed);
+        }
+        return list;
     }
 }

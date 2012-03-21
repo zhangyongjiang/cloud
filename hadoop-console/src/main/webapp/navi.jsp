@@ -6,7 +6,7 @@
 
 <div class="col-2">
 
-	<h3 style="margin-top: 16px">Hadoop</h3>
+	<h3 style="margin-top: 0px">&nbsp;</h3>
 	<ul class="submenu">
 		<li><a href='<c:url value="/hadoop/hdfs/info/index.jsp.oo?path=/"/>'>Hadoop File Explorer</a></li>
 		<li><a href='<c:url value="/job/create/index.jsp.oo"/>'>New Work Flow</a></li>

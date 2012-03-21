@@ -21,4 +21,6 @@ public interface JobExecutionManager {
     JobExecutionDetailsList getJobExecutionList(String jobId, int offset, int size);
 
     JobExecutionDetails getJobExecutionDetails(String jobExecutionId);
+
+    JobExecutionDetailsList getJobExecutionList(int offset, int size);
 }

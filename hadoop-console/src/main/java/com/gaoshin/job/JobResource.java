@@ -173,7 +173,12 @@ public class JobResource extends JerseyBaseResource {
     @GET
     @Path("job-execution/list")
     public JobExecutionDetailsList getJobExecutionList(@QueryParam("jobId")String jobId) {
-        return jobExecutionManager.getJobExecutionList(jobId, 0, 100);
+        if(jobId != null && jobId.trim().length() > 0 && !"null".equals(jobId)) {
+            return jobExecutionManager.getJobExecutionList(jobId, 0, 100);
+        }
+        else {
+            return jobExecutionManager.getJobExecutionList(0, 100);
+        }
     }
     
     @GET

@@ -64,6 +64,8 @@
 <jsp:include page="menu.jsp.oo"></jsp:include>
 </div>
 
+<div class="sep" style="margin-top: 36px;">&nbsp;</div>
+
 <div id="body">
   <table style="border:none;width:100%;"><tr>
 	<td style="border:none;padding:0;margin:0;vertical-align: top;width:200px;">

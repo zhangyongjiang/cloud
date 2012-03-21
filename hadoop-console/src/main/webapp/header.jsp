@@ -10,5 +10,5 @@
 </div>
 
 <div style="margin-left:20px;margin-top:-100px;">
-<h2>Hadoop Console</h2>
+<h2><a href='<c:url value="/index.jsp.oo"/>'>Hadoop Console</a></h2>
 </div>

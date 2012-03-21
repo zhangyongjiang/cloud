@@ -105,4 +105,9 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
         List<RuntimeJobConfEntity> list = find("from RuntimeJobConfEntity jece where jece.jobExecutionId=? ", jobExecutionId);
         return list;
     }
+
+    @Override
+    public List<JobExecutionEntity> getJobExecutionList(int offset, int size) {
+        return find(JobExecutionEntity.class, offset, size, "from JobExecutionEntity jee order by jee.scheduledStartTime desc");
+    }
 }
