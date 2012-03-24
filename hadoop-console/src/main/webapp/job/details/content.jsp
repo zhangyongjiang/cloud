@@ -33,7 +33,12 @@
 	</o:tr-label-value>
 	
 	<o:tr-label-value label="Name" >${it.name}</o:tr-label-value>
-	<o:tr-label-value label="Description" >${it.description}</o:tr-label-value>
+	<o:tr-label-value label="Description" >
+		${it.description}
+		<c:forEach var="task" items="${it.taskDetailsList.items}">
+				<p>${task.description}</p>
+		</c:forEach>
+	</o:tr-label-value>
 	
 	<o:tr-label-value label="Cron Expression" >${it.cronExpression}</o:tr-label-value>
 	<o:tr-label-value label="Delay" >${it.delay}</o:tr-label-value>
