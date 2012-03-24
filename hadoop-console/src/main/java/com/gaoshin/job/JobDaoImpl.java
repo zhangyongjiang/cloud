@@ -110,4 +110,15 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
     public List<JobExecutionEntity> getJobExecutionList(int offset, int size) {
         return find(JobExecutionEntity.class, offset, size, "from JobExecutionEntity jee order by jee.scheduledStartTime desc");
     }
+
+    @Override
+    public void delteTask(String taskId) {
+        jdbcTemplate.update("delete from TaskEntity where id=?", taskId);
+        jdbcTemplate.update("delete from JobConfEntity where ownerId=?", taskId);
+    }
+
+    @Override
+    public void deleteTaskConf(String taskConfId) {
+        jdbcTemplate.update("delete from JobConfEntity where id=?", taskConfId);
+    }
 }

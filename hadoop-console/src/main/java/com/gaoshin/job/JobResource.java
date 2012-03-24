@@ -145,6 +145,13 @@ public class JobResource extends JerseyBaseResource {
     }
 
     @POST
+    @Path("task-conf/delete/{taskConfId}") 
+    public GenericResponse deleteTaskConf(@PathParam("taskConfId")String taskConfId) {
+        jobService.deleteTaskConf(taskConfId);
+        return new GenericResponse();
+    }
+
+    @POST
     @Path("job-dependency/create")
     public JobDependency create(JobDependency jobDependency) {
         return jobService.createJobDependency(jobDependency);

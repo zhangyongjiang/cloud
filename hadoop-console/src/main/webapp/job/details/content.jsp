@@ -95,9 +95,14 @@
 					<o:tr-label-value label="Description" >${task.description}</o:tr-label-value>
 					<o:tr-label-value label="Task Configuration" >
 						<c:forEach var="taskConf" items="${task.taskConfList.list}">
-							<a href='<c:url value="/job/task/conf/edit/index.jsp.oo?id="/>${taskConf.id}'>${taskConf.name } = ${taskConf.value }</a> <br/>
+							<div style='width:100%;clear:both;padding:6px;'>
+								<div style="float:left;margin-right:16px;"><a href='#' onClick='deleteTaskConf("${taskConf.id}")'><img src='<c:url value="/images/delete_icon.gif"/>' border="0"/></a></div>
+								<div style="float:left;"><a href='<c:url value="/job/task/conf/edit/index.jsp.oo?id="/>${taskConf.id}'>${taskConf.name } = ${taskConf.value }</a></div>
+							</div>
 						</c:forEach>
-						<a href='<c:url value="/job/task/conf/create/index.jsp.oo?taskId=${task.id}"/>'>Add</a>
+						<div style='margin-top:10px;width:100%;clear:both;padding:6px;'>
+							<a href='<c:url value="/job/task/conf/create/index.jsp.oo?taskId=${task.id}"/>'>Add</a>
+						</div>
 					</o:tr-label-value>
 				</table>
 			</c:forEach>
@@ -187,6 +192,26 @@ function deleteTask(taskId) {
 		return;
     $.ajax({
         url : base + "/ws/v1/job/task/delete/" + taskId,
+        type : "POST",
+        contentType : "application/json; charset=utf-8",
+        dataType : "json",
+        complete : function(transport) {
+                if (transport.status == 200) {
+                        window.location = base + "/job/details/index.jsp.oo?id=${it.id}";
+                } else {
+                        alert('Error: ' + transport.status + ", "
+                                        + transport.responseText);
+                }
+        }
+	});
+}
+
+function deleteTaskConf(taskConfId) {
+	var agree=confirm("Are you sure you wish to continue?");
+	if (!agree)
+		return;
+    $.ajax({
+        url : base + "/ws/v1/job/task-conf/delete/" + taskConfId,
         type : "POST",
         contentType : "application/json; charset=utf-8",
         dataType : "json",

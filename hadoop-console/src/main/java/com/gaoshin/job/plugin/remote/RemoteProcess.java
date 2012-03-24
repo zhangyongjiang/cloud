@@ -33,11 +33,17 @@ public class RemoteProcess extends BaseProcess {
         String password = confs.get(ParamPassword);
         String privateKey = confs.get(ParamPrivateKey);
         try {
-            if(user != null) {
+            if(user != null && password != null) {
                 sshShell = new SshShell(host, user, password);
             }
-            else {
+            else if(user != null && privateKey != null){
+                sshShell = new SshShell(host, user, privateKey.getBytes());
+            }
+            else if(privateKey != null){
                 sshShell = new SshShell(host, privateKey.getBytes());
+            }
+            else {
+                throw new RuntimeException("need user/password or private key");
             }
             sshShell.open();
         }

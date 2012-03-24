@@ -4,17 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class HibernateBaseDao implements GenericDao {
 	protected HibernateTemplate hibernateTemplate;
+	protected JdbcTemplate jdbcTemplate;
 
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+	    jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		hibernateTemplate = new HibernateTemplate(sessionFactory);

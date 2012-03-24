@@ -1,6 +1,5 @@
 package common.util.ssh;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +14,7 @@ import com.sshtools.j2ssh.authentication.SshAuthenticationClient;
 import com.sshtools.j2ssh.connection.ChannelState;
 import com.sshtools.j2ssh.session.SessionChannelClient;
 import com.sshtools.j2ssh.transport.IgnoreHostKeyVerification;
+import com.sshtools.j2ssh.transport.publickey.SshPrivateKey;
 import com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile;
 import com.sshtools.j2ssh.util.InvalidStateException;
 
@@ -34,13 +34,13 @@ public class SshShell {
 		authClient = auth;
 	}
 
-    public SshShell(String host, String keyFile) throws Exception {
+    public SshShell(String host, SshPrivateKey privateKey) throws Exception {
         this.host = host;
         sshClient = new SshClient();
         
-        SshPrivateKeyFile file = SshPrivateKeyFile.parse(new File(keyFile));
+        //SshPrivateKeyFile file = SshPrivateKeyFile.parse(new File(keyFile));
         PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
-        auth.setKey(file.toPrivateKey(null));
+        auth.setKey(privateKey);
         authClient = auth;
     }
 
@@ -51,6 +51,17 @@ public class SshShell {
         SshPrivateKeyFile file = SshPrivateKeyFile.parse(key);
         PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
         auth.setKey(file.toPrivateKey(null));
+        authClient = auth;
+    }
+
+    public SshShell(String host, String user, byte[] key) throws Exception {
+        this.host = host;
+        sshClient = new SshClient();
+        
+        SshPrivateKeyFile file = SshPrivateKeyFile.parse(key);
+        PublicKeyAuthenticationClient auth = new PublicKeyAuthenticationClient();
+        auth.setKey(file.toPrivateKey(null));
+        auth.setUsername(user);
         authClient = auth;
     }
 

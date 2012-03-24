@@ -41,4 +41,8 @@ public interface JobDao extends GenericDao {
     List<RuntimeJobConfEntity> getJobExecutionConfList(String jobExecutionId);
 
     List<JobExecutionEntity> getJobExecutionList(int offset, int size);
+
+    void delteTask(String taskId);
+
+    void deleteTaskConf(String taskConfId);
 }

@@ -50,4 +50,6 @@ public interface JobService {
     Job update(Job job);
 
     TaskConfDetails getTaskConfDetails(String confId);
+
+    void deleteTaskConf(String taskConfId);
 }

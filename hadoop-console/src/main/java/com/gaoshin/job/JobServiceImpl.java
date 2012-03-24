@@ -194,8 +194,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void deleteTask(String taskId) {
-        TaskEntity entity = jobDao.getEntity(TaskEntity.class, taskId);
-        jobDao.deleteEntity(entity);
+        jobDao.delteTask(taskId);
     }
 
     @Override
@@ -266,5 +265,10 @@ public class JobServiceImpl implements JobService {
         TaskConfDetails details = ReflectionUtil.copy(TaskConfDetails.class, entity);
         details.setTaskDetails(taskDetails);
         return details;
+    }
+
+    @Override
+    public void deleteTaskConf(String taskConfId) {
+        jobDao.deleteTaskConf(taskConfId);
     }
 }
