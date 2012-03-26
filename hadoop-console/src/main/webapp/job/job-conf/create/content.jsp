@@ -13,7 +13,7 @@
 <form method="post" onSubmit="return createJobConf();">
 	<table>
 		<o:text-input-tr label="Key" id="name" ></o:text-input-tr>
-		<o:text-input-tr label="Value" id="value" size="80"></o:text-input-tr>
+		<o:textarea-tr label="Value" id="value" style="width:660px;height:400px;"></o:textarea-tr>
 		<o:text-input-tr label="Is Password?" id="password"></o:text-input-tr>
 		<o:submit-tr value="Add" cancel="window.history.back()"></o:submit-tr>
 	</table>

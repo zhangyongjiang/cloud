@@ -13,7 +13,7 @@
 <form method="post" onSubmit="return updateTaskConf();">
 	<table>
 		<o:text-input-tr label="Key" id="name" value="${it.name }"></o:text-input-tr>
-		<o:text-input-tr label="Value" id="value" size="80" value="${it.value }"></o:text-input-tr>
+		<o:textarea-tr style="width:660px;height:200px;" label="Value" id="value" value="${it.value }"></o:textarea-tr>
 		<o:text-input-tr label="Is Password?" id="password" value="${it.password }"></o:text-input-tr>
 		<o:submit-tr value="Update" cancel="window.history.back()"></o:submit-tr>
 	</table>

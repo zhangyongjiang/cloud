@@ -8,7 +8,8 @@
 
 	<h3 style="margin-top: 0px">&nbsp;</h3>
 	<ul class="submenu">
-		<li><a href='<c:url value="/hadoop/hdfs/info/index.jsp.oo?path=/"/>'>Hadoop File Explorer</a></li>
+		<li><a href='<c:url value="/hadoop/cluster/configuration/index.jsp.oo"/>'>Cluster Configuration</a></li>
+		<li><a href='<c:url value="/hadoop/hdfs/info/index.jsp.oo?path=/"/>'>HDFS Explorer</a></li>
 		<li><a href='<c:url value="/job/create/index.jsp.oo"/>'>New Work Flow</a></li>
 		<li><a href='<c:url value="/job/list/index.jsp.oo"/>'>Work Flow List</a></li>
 		<li><a href='<c:url value="/conf/list/index.jsp.oo"/>'>Settings</a></li>

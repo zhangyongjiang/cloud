@@ -4,21 +4,20 @@
 <%@ taglib tagdir="/WEB-INF/tags/common" prefix="o" %>
 
 <%
-	String url = "/ws/v1/conf/list?format=object";
+	String url = "/ws/v1/conf/list?ownerId=hadoop-conf&format=object";
 	request.getRequestDispatcher(url).include(request, response);
 %>
 
-<div class="page-header">Configuration List</div>
+<div class="page-header">Hadoop Configuration</div>
 
 <button onclick="createConf()">Create</button>
 
 <table style="border:solid 1px;">
-<tr><th>Name</th><th>Value</th><th>Owner ID</th><th>&nbsp;</th></tr>
+<tr><th>Name</th><th>Value</th><th>&nbsp;</th></tr>
 <c:forEach var="conf" items="${it }">
 	<tr>
 		<td><a href='<c:url value="/conf/set/index.jsp.oo?confId="/>${conf.id}'>${conf.name}</a></td>
-		<td>${conf.value }</td>
-		<td>${conf.ownerId }&nbsp;</td>
+		<td><pre>${fn:escapeXml(conf.value)}</pre></td>
 		<td><button onclick="remove('${conf.id}')">Remove</button></td></tr>
 </c:forEach>
 </table>

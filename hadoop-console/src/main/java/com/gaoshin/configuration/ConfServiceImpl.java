@@ -20,23 +20,6 @@ public class ConfServiceImpl implements ConfService {
     private ConfDao confDao;
 
     @Override
-    public JobConf set(String key, String value) {
-        JobConfEntity entity = confDao.getUniqueResult(JobConfEntity.class, "name", key);
-        if(entity == null) {
-            entity = new JobConfEntity();
-            entity.setName(key);
-            entity.setValue(value);
-            confDao.saveEntity(entity);
-        }
-        else {
-            entity.setName(key);
-            entity.setValue(value);
-            confDao.merge(entity);
-        }
-        return ReflectionUtil.copy(JobConf.class, entity);
-    }
-
-    @Override
     public JobConf getByKey(String key) {
         JobConfEntity entity = confDao.getUniqueResult(JobConfEntity.class, "name", key);
         if(entity == null) {
@@ -47,8 +30,12 @@ public class ConfServiceImpl implements ConfService {
     }
 
     @Override
-    public List<JobConf> list() {
-        List<JobConfEntity> entities = confDao.find("from " + JobConfEntity.class.getSimpleName() + " conf where conf.ownerId is null");
+    public List<JobConf> list(String ownerId) {
+        List<JobConfEntity> entities = null;
+        if(ownerId == null)
+            entities = confDao.find("from " + JobConfEntity.class.getSimpleName() + " conf");
+        else
+            entities = confDao.find("from " + JobConfEntity.class.getSimpleName() + " conf where conf.ownerId = ?", ownerId);
         List<JobConf> beans = new ArrayList<JobConf>();
         for(JobConfEntity entity : entities) {
             beans.add(ReflectionUtil.copy(JobConf.class, entity));
@@ -74,7 +61,17 @@ public class ConfServiceImpl implements ConfService {
 
     @Override
     public JobConf set(JobConf conf) {
-        return set(conf.getName(), conf.getValue());
+        JobConfEntity entity = confDao.getUniqueResult(JobConfEntity.class, "name", conf.getName());
+        if(entity == null) {
+            entity = ReflectionUtil.copy(JobConfEntity.class, conf);
+            confDao.saveEntity(entity);
+            conf.setId(entity.getId());
+        }
+        else {
+            entity = ReflectionUtil.copy(JobConfEntity.class, conf);
+            confDao.merge(entity);
+        }
+        return conf;
     }
 
 }

@@ -24,7 +24,8 @@
 <form method="post" onSubmit="return createConf();">
 	<table>
 		<o:text-input-tr label="Name" id="name" value="${it.name }"></o:text-input-tr>
-		<o:text-input-tr label="Value" id="value" value="${it.value }"></o:text-input-tr>
+		<o:text-input-tr label="Owner ID" id="ownerId" value="${it.ownerId }"></o:text-input-tr>
+		<o:textarea-tr label="Value" id="value" style="width:600px;height:400px;" value="${it.value }"></o:textarea-tr>
 		<o:submit-tr value="Create" cancel="window.history.back()"></o:submit-tr>
 	</table>
 </form>
@@ -35,12 +36,14 @@ function createConf() {
 		var req = {
 				id: '${it.id}',
 				name: $("#name").val(),
+				ownerId: $("#ownerId").val(),
 				value: $("#value").val()
 			};
 	</c:if>
 	<c:if test="${empty it.id}">
 	var req = {
 			name: $("#name").val(),
+			ownerId: $("#ownerId").val(),
 			value: $("#value").val()
 		};
 	</c:if>

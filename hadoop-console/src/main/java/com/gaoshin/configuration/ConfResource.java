@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,8 @@ public class ConfResource extends JerseyBaseResource {
     @POST
     @Path("/set")
     public JobConf set(JobConf conf) {
+        if(conf.getOwnerId() != null && conf.getOwnerId().trim().length() == 0)
+            conf.setOwnerId(null);
         return confService.set(conf);
     }
     
@@ -42,7 +45,7 @@ public class ConfResource extends JerseyBaseResource {
     
     @GET
     @Path("list")
-    public List<JobConf> list() {
-        return confService.list();
+    public List<JobConf> list(@QueryParam("ownerId")String ownerId) {
+        return confService.list(ownerId);
     }
 }

@@ -6,9 +6,8 @@ import com.gaoshin.job.bean.JobConf;
 
 
 public interface ConfService {
-    JobConf set(String key, String value);
     JobConf getByKey(String key);
-    List<JobConf> list();
+    List<JobConf> list(String ownerId);
     void remove(String confid);
     JobConf get(String confid);
     JobConf set(JobConf conf);
