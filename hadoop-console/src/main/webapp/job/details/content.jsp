@@ -122,6 +122,19 @@
 			</c:forEach>
 	</o:tr-label-value>
 
+	<o:tr-label-value label="Downstreams" >
+			<c:forEach var="downstream" items="${it.downStreamList.list}">
+				<table style="border:solid 1px blue;margin-bottom:16px;">
+					<o:tr-label-value label="Dependent ID" >
+						<a href='<c:url value="/job/job-dependency/edit/index.jsp.oo?id="/>${downstream.id}'>${downstream.id}</a>
+						<div style="float:right;margin-left:48px;"><a href='#' onClick='deleteJobDependency("${downstream.id}")'><img src='<c:url value="/images/delete_icon.gif"/>' border="0"/></a></div>
+					</o:tr-label-value>
+					<o:tr-label-value label="Up Stream" >${downstream.blockedByJob.id} ${downstream.blockedByJob.name} </o:tr-label-value>
+					<o:tr-label-value label="Time Diff Seconds" >${downstream.timeDiff}</o:tr-label-value>
+				</table>
+			</c:forEach>
+	</o:tr-label-value>
+
 </tbody></table></div>
 
 <script type="text/javascript">

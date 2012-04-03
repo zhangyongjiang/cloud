@@ -12,6 +12,7 @@ public class JobDetails extends Job {
     private JobConfList jobConfList = new JobConfList();
     private TaskDetailsList taskDetailsList = new TaskDetailsList();
     private JobDependencyList jobDependencyList = new JobDependencyList();
+    private JobDependencyList downStreamList = new JobDependencyList();
 
     public JobConfList getJobConfList() {
         return jobConfList;
@@ -35,5 +36,13 @@ public class JobDetails extends Job {
 
     public void setTaskDetailsList(TaskDetailsList taskDetailsList) {
         this.taskDetailsList = taskDetailsList;
+    }
+
+    public JobDependencyList getDownStreamList() {
+        return downStreamList;
+    }
+
+    public void setDownStreamList(JobDependencyList downStreamList) {
+        this.downStreamList = downStreamList;
     }
 }

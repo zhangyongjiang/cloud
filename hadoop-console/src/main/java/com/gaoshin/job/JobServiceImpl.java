@@ -121,22 +121,44 @@ public class JobServiceImpl implements JobService {
             }
         });
         
-        List<JobDependencyEntity> deps = jobDao.find(JobDependencyEntity.class, "from JobDependencyEntity where jobId=?", jobId);
-        List jobIdList = new ArrayList<Long>();
-        for(JobDependencyEntity dep : deps) {
-            jobIdList.add(dep.getUpstreamJobId());
-        }
-        List<JobEntity> blockedByJobList = jobDao.in(JobEntity.class, "from JobEntity je where je.id in (:values)", jobIdList);
-        Map<String, JobEntity> map = new HashMap<String, JobEntity>();
-        for(JobEntity je : blockedByJobList) {
-            map.put(je.getId(), je);
+        {
+            List<JobDependencyEntity> deps = jobDao.find(JobDependencyEntity.class, "from JobDependencyEntity where jobId=?", jobId);
+            List jobIdList = new ArrayList<Long>();
+            for(JobDependencyEntity dep : deps) {
+                jobIdList.add(dep.getUpstreamJobId());
+            }
+            List<JobEntity> blockedByJobList = jobDao.in(JobEntity.class, "from JobEntity je where je.id in (:values)", jobIdList);
+            Map<String, JobEntity> map = new HashMap<String, JobEntity>();
+            for(JobEntity je : blockedByJobList) {
+                map.put(je.getId(), je);
+            }
+            
+            for(JobDependencyEntity dep : deps) {
+                JobDependencyDetails jobDependency = ReflectionUtil.copy(JobDependencyDetails.class, dep);
+                Job depJob = ReflectionUtil.copy(Job.class, map.get(dep.getUpstreamJobId()));
+                jobDependency.setBlockedByJob(depJob);
+                bean.getJobDependencyList().getList().add(jobDependency);
+            }
         }
         
-        for(JobDependencyEntity dep : deps) {
-            JobDependencyDetails jobDependency = ReflectionUtil.copy(JobDependencyDetails.class, dep);
-            Job depJob = ReflectionUtil.copy(Job.class, map.get(dep.getUpstreamJobId()));
-            jobDependency.setBlockedByJob(depJob);
-            bean.getJobDependencyList().getList().add(jobDependency);
+        {
+            List<JobDependencyEntity> downstreams = jobDao.find(JobDependencyEntity.class, "from JobDependencyEntity jde where jde.upstreamJobId=?", jobId);
+            List jobIdList = new ArrayList<Long>();
+            for(JobDependencyEntity dep : downstreams) {
+                jobIdList.add(dep.getUpstreamJobId());
+            }
+            List<JobEntity> blockedJobList = jobDao.in(JobEntity.class, "from JobEntity je where je.id in (:values)", jobIdList);
+            Map<String, JobEntity> map = new HashMap<String, JobEntity>();
+            for(JobEntity je : blockedJobList) {
+                map.put(je.getId(), je);
+            }
+            
+            for(JobDependencyEntity dep : downstreams) {
+                JobDependencyDetails jobDependency = ReflectionUtil.copy(JobDependencyDetails.class, dep);
+                Job depJob = ReflectionUtil.copy(Job.class, map.get(dep.getUpstreamJobId()));
+                jobDependency.setBlockedByJob(depJob);
+                bean.getDownStreamList().getList().add(jobDependency);
+            }
         }
         
         return bean;
