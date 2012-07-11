@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
+
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,10 +33,11 @@ public class JobSchedulerImpl implements JobScheduler {
 
     public JobSchedulerImpl() {
         System.out.println("starting JobSchedulerImpl");
-        startCronSchedulerThread();
+//        startCronSchedulerThread();
     }
     
-    private void startCronSchedulerThread() {
+    @PostConstruct
+    public void startCronSchedulerThread() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -45,6 +48,19 @@ public class JobSchedulerImpl implements JobScheduler {
                     catch (InterruptedException e) {
                     }
                 }
+                
+                try {
+                    List<JobExecutionEntity> list = jobDao.listJobExecutionsByStatus(WorkStatus.Running);
+                    for(JobExecutionEntity jee : list) {
+                        System.out.println("set job exec to killed for unfinished job execs");
+                        jee.setStatus(WorkStatus.Killed);
+                        jobDao.merge(jee);
+                    }
+                }
+                catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                
                 while(true) {
                     try {
                         schedule();
@@ -87,13 +103,13 @@ public class JobSchedulerImpl implements JobScheduler {
         try {
             CronExpression cr = new CronExpression(je.getCronExpression());
             long scheduledTime = lastScheduleTime;
-            while(true) {
+//            while(true) {
                 Date next = cr.getNextValidTimeAfter(new Date(scheduledTime));
                 scheduledTime = next.getTime();
-                if(scheduledTime > System.currentTimeMillis()) {
-                    break;
-                }
-            }
+//                if(scheduledTime > System.currentTimeMillis()) {
+//                    break;
+//                }
+//            }
             JobConfList confList = new JobConfList();
             confList.getList().add(new JobConf(JobConfKey.Timestamp.name(), String.valueOf(scheduledTime)));
             runJob(je.getId(), confList);

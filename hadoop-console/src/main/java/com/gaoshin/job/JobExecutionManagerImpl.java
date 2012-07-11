@@ -3,8 +3,10 @@ package com.gaoshin.job;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +57,14 @@ public class JobExecutionManagerImpl implements JobExecutionManager, Application
     
     @Override
     public void checkDueJob() {
+        List<JobExecutionEntity> runningExecutions = jobDao.listJobExecutionsByStatus(WorkStatus.Running);
+        Set<String> runningJobs = new HashSet<String>();
+        for(JobExecutionEntity jee : runningExecutions) {
+            runningJobs.add(jee.getJobId());
+        }
         List<JobExecutionEntity> dueJobList = jobDao.getDueJobExecutions();
         for(JobExecutionEntity jee : dueJobList) {
-            if(!areUpstreamsReady(jee)) {
+            if(!areUpstreamsReady(jee) || runningJobs.contains(jee.getJobId())) {
                 continue;
             }
             runJobExecution(jee);
