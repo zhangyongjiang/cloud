@@ -124,6 +124,6 @@ public class JobDaoImpl extends HibernateBaseDao implements JobDao {
 
     @Override
     public List<JobExecutionEntity> listJobExecutionsByStatus(WorkStatus status) {
-        return find(JobExecutionEntity.class, "from JobExecutionEntity jee where jee.status=:status", status);
+        return find(JobExecutionEntity.class, "from JobExecutionEntity jee where jee.status=?", status);
     }
 }
